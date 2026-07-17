@@ -52,7 +52,7 @@ function buttonRipple() {
 }
 
 function navbarShadow() {
-    let navbar = document.querySelector(".navbar-custom");
+    let navbar = document.querySelector(".topnav");
     if (navbar != null) {
         window.addEventListener("scroll", function() {
             if (window.scrollY > 12) {
