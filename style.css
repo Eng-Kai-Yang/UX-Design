@@ -182,6 +182,7 @@ a{
     border-radius:999px;
     color:var(--orange-light);
     font-family:'Space Mono',monospace;
+    text-transform: uppercase;
     font-size:.7rem;
 }
 
@@ -208,6 +209,7 @@ a{
     border-radius:999px;
     border:1px solid var(--border-strong);
     color:var(--text);
+    text-transform: uppercase;
     transition:.3s;
 }
 
