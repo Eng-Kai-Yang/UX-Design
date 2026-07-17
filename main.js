@@ -1,38 +1,36 @@
-let currentPage = window.location.pathname.split("/").pop();
-if (currentPage === "") {
-    currentPage = "index.html";
-}
-let navLinks = document.querySelectorAll(".topnav-link");
-for (let i = 0; i < navLinks.length; i++) {
-    if (navLinks[i].href.includes(currentPage)) {
-        navLinks[i].classList.add("active");
+const currentPage = window.location.pathname.split("/").pop() || "index.html";
+const navLinks = document.querySelectorAll(".topnav-link");
+navLinks.forEach(link => {
+    if (link.href.includes(currentPage)) {
+        link.classList.add("active");
     }
-}
+});
 
 function showReveal() {
-    let revealItems = document.querySelectorAll(".reveal");
-    let observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
+    const revealItems = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("in");
+                observer.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.15
     });
-    for (let i = 0; i < revealItems.length; i++) {
-        observer.observe(revealItems[i]);
-    }
+    revealItems.forEach(item => {
+        observer.observe(item);
+    });
 }
+
 function buttonRipple() {
-    let buttons = document.querySelectorAll(
+    const buttons = document.querySelectorAll(
         ".btn-glow, .btn-outline-glow"
     );
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener("click", function(event) {
-            let button = buttons[i];
-            let circle = document.createElement("span");
-            let size = Math.max(
+    buttons.forEach(button => {
+        button.addEventListener("click", event => {
+            const circle = document.createElement("span");
+            const size = Math.max(
                 button.offsetWidth,
                 button.offsetHeight
             );
@@ -44,28 +42,30 @@ function buttonRipple() {
             circle.style.top =
                 event.offsetY - size / 2 + "px";
             button.appendChild(circle);
-            setTimeout(function() {
+            setTimeout(() => {
                 circle.remove();
             }, 600);
         });
-    }
+    });
 }
 
 function navbarShadow() {
-    let navbar = document.querySelector(".topnav");
-    if (navbar != null) {
-        window.addEventListener("scroll", function() {
-            if (window.scrollY > 12) {
-                navbar.style.boxShadow =
-                "0 10px 30px -18px rgba(0,0,0,0.7)";
-            } else {
-                navbar.style.boxShadow = "none";
-            }
-        });
+    const navbar = document.querySelector(".topnav");
+    if (!navbar) {
+        return;
     }
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 12) {
+            navbar.style.boxShadow =
+                "0 10px 30px -18px rgba(0,0,0,0.7)";
+        } else {
+            navbar.style.boxShadow = "none";
+        }
+    });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
     showReveal();
     buttonRipple();
     navbarShadow();
