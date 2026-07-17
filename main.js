@@ -2,7 +2,7 @@ let currentPage = window.location.pathname.split("/").pop();
 if (currentPage === "") {
     currentPage = "index.html";
 }
-let navLinks = document.querySelectorAll(".nav-link-custom");
+let navLinks = document.querySelectorAll(".topnav-link");
 for (let i = 0; i < navLinks.length; i++) {
     if (navLinks[i].href.includes(currentPage)) {
         navLinks[i].classList.add("active");

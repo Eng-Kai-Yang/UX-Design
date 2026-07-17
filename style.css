@@ -102,14 +102,14 @@ a{
     transform:rotate(10deg) scale(1.05);
 }
 
-.nav-link-custom{
+.topnav-link{
     color:var(--text-dim)!important;
     text-transform:uppercase;
     font-weight:600;
     position:relative;
 }
 
-.nav-link-custom::after{
+.topnav-link::after{
     content:"";
     position:absolute;
     left:1rem;
@@ -122,11 +122,11 @@ a{
     transition:.3s;
 }
 
-.nav-link-custom:hover{
+.topnav-link:hover{
     color:var(--text)!important;
 }
 
-.nav-link-custom:hover::after{
+.topnav-link:hover::after{
     transform:scaleX(1);
 }
 
