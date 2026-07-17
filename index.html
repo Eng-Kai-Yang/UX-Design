@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hobby Website — Home</title>
+<title>Hobby Website - Home</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+<link rel="icon" href="./images/icon.png">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="main.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
+    <nav class="navbar navbar-expand-lg topnav">
         <div class="container">
-            <a class="navbar-brand brand" href="index.html">
+            <a class="navbar-brand title" href="index.html">
                 <img class="nav_logo" src="./images/icon.png" alt="Hobby Website">
-                <span>Hobby Website<span class="brand-sub">by Kai Yang &amp; Zi Yu</span></span>
+                <span>Hobby Website<span class="subtitle">by Kai Yang &amp; Zi Yu</span></span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
@@ -33,21 +34,21 @@
             </div>
         </div>
     </nav>
-    <header class="hero">
+    <header class="main">
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 reveal">
                     <span class="eyebrow">Our photography Hobby</span>
-                    <h1 class="hero-title">Taking the<br><span class="accent">perfect</span> picture</h1>
-                    <p class="hero-lede">We like to take pictures of sceneries and places that catches our eye.</p>
+                    <h1 class="main-title">Taking the<br><span class="accent">perfect</span> picture</h1>
+                    <p class="intro">We like to take pictures of sceneries and places that catches our eye.</p>
                     <div class="d-flex flex-wrap gap-3 mt-4">
                         <a href="photography.html" class="btn-glow"><i class="fa-solid fa-camera me-2"></i>View Gallery</a>
                         <a href="feedback.html" class="btn-outline-glow"><i class="fa-regular fa-comment-dots me-2"></i>Leave Feedback</a>
                     </div>
                 </div>
                 <div class="col-lg-6 reveal">
-                    <div class="hero-frame" data-tag="Zi Yu · December 2025">
-                        <img src="./images/Photography/ChineseCanalTown.png" alt="MBS">
+                    <div class="main-image" data-tag="Zi Yu · December 2025">
+                        <img src="./images/Photography/ChineseCanalTown.png" alt="Chinese Canal Town">
                     </div>
                 </div>
             </div>
@@ -55,7 +56,7 @@
     </header>
     <section class="section pt-0">
         <div class="container">
-            <div class="surface p-5 text-center reveal" style="border-color:var(--border-strong)">
+            <div class="gallery-box p-5 text-center reveal" style="border-color:var(--border-strong)">
                 <h2 class="mb-3">See something you like?</h2>
                 <p class="text-dim mb-4">Rate a few pictures in our gallery!</p>
                 <a href="photography.html" class="btn-glow"><i class="fa-solid fa-star me-2"></i>Rate our pictures</a>
