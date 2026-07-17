@@ -1,57 +1,72 @@
-(function () {
-    const current = window.location.pathname.split("/").pop() || "index.html";
-    document.querySelectorAll(".nav-link-custom").forEach(link => {
-        if (link.getAttribute("href") === current) {
-            link.classList.add("active");
-        }
-    });
-})();
+let currentPage = window.location.pathname.split("/").pop();
+if (currentPage === "") {
+    currentPage = "index.html";
+}
+let navLinks = document.querySelectorAll(".nav-link-custom");
+for (let i = 0; i < navLinks.length; i++) {
+    if (navLinks[i].href.includes(currentPage)) {
+        navLinks[i].classList.add("active");
+    }
+}
 
-function initReveal() {
-    const items = document.querySelectorAll(".reveal");
-    if (!items.length) return;
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+function showReveal() {
+    let revealItems = document.querySelectorAll(".reveal");
+    let observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add("in");
-                observer.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.15
     });
-    items.forEach(item => observer.observe(item));
+    for (let i = 0; i < revealItems.length; i++) {
+        observer.observe(revealItems[i]);
+    }
 }
-
-function initRipples() {
-    document.querySelectorAll(".btn-glow, .btn-outline-glow").forEach(button => {
-        button.addEventListener("click", function (e) {
-            const rect = button.getBoundingClientRect();
-            const ripple = document.createElement("span");
-            const size = Math.max(rect.width, rect.height);
-            ripple.classList.add("ripple");
-            ripple.style.width = ripple.style.height = size + "px";
-            ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
-            ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
-            button.appendChild(ripple);
-            setTimeout(() => {
-                ripple.remove();
+function buttonRipple() {
+    let buttons = document.querySelectorAll(
+        ".btn-glow, .btn-outline-glow"
+    );
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function(event) {
+            let button = buttons[i];
+            let circle = document.createElement("span");
+            let size = Math.max(
+                button.offsetWidth,
+                button.offsetHeight
+            );
+            circle.className = "ripple";
+            circle.style.width = size + "px";
+            circle.style.height = size + "px";
+            circle.style.left =
+                event.offsetX - size / 2 + "px";
+            circle.style.top =
+                event.offsetY - size / 2 + "px";
+            button.appendChild(circle);
+            setTimeout(function() {
+                circle.remove();
             }, 600);
         });
-});
+    }
 }
 
-(function () {
-    const navbar = document.querySelector(".navbar-custom");
-    if (!navbar) return;
-    window.addEventListener("scroll", () => {
-        navbar.style.boxShadow =
-            window.scrollY > 12
-                ? "0 10px 30px -18px rgba(0,0,0,.7)"
-                : "none";
-    });
-})();
-document.addEventListener("DOMContentLoaded", () => {
-    initReveal();
-    initRipples();
+function navbarShadow() {
+    let navbar = document.querySelector(".navbar-custom");
+    if (navbar != null) {
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 12) {
+                navbar.style.boxShadow =
+                "0 10px 30px -18px rgba(0,0,0,0.7)";
+            } else {
+                navbar.style.boxShadow = "none";
+            }
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    showReveal();
+    buttonRipple();
+    navbarShadow();
 });
