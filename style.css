@@ -86,7 +86,7 @@ a:hover{
 
 .topnav{
     background:rgba(23,17,11,.9);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(7.5px);
     border-bottom:1px solid var(--border);
     padding:.9rem 0;
     position: sticky;
