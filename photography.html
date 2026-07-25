@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hobby Website - Photography</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="./images/icon.png">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="main.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg topnav">
+        <div class="container">
+            <a class="navbar-brand title" href="index.html">
+                <img class="nav_logo" src="./images/icon.png" alt="Hobby Website">
+                <span>Hobby Website<span class="subtitle">by Kai Yang &amp; Zi Yu</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link topnav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link topnav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link topnav-link" href="photography.html">Photography</a></li>
+                    <li class="nav-item"><a class="nav-link topnav-link" href="feedback.html">Feedback</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="main pb-3 text-center">
+        <div class="container">
+            <span class="eyebrow justify-content-center">Featured pictures, and our gallery</span>
+            <h1 class="main-title" style="font-size:clamp(2.2rem,4.5vw,3.6rem)">The Gallery</h1>
+            <p class="intro mx-auto">Click a photo to learn more, and click the stars to rate it.</p>
+        </div>
+    </header>
+
+    <section class="container mb-5">
+        <section class="mb-2 position-relative">
+            <div class="slide_box">
+                <div class="slide_row">
+
+                    <div class="slide_item" data-picturebox
+                        data-id="p1"
+                        data-url="./images/Photography/ChineseCanalTown.png"
+                        data-title="Chinese Canal Town"
+                        data-desc="Placeholder"
+                        data-location="Qili Mountain Tang, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <img src="./images/Photography/ChineseCanalTown.png" class="slide_img" alt="Chinese Canal Town">
+                        <div class="slide_info">
+                            <h3 class="big_title text-white fs-4 mb-1">Chinese Canal Town</h3>
+                            <p class="mb-0 text-white-50 small"><i class="fas fa-map-marker-alt me-1"></i>Qili Mountain Tang, China</p>
+                        </div>
+                    </div>
+
+                    <div class="slide_item" data-picturebox
+                        data-id="p3"
+                        data-url="./images/Photography/ShantangStreet.png"
+                        data-title="Shantang Street"
+                        data-desc="Placeholder"
+                        data-location="Qili Mountain Tang, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <img src="./images/Photography/ShantangStreet.png" class="slide_img" alt="Shantang Street">
+                        <div class="slide_info">
+                            <h3 class="big_title text-white fs-4 mb-1">Shantang Street</h3>
+                            <p class="mb-0 text-white-50 small"><i class="fas fa-map-marker-alt me-1"></i>Qili Mountain Tang, China</p>
+                        </div>
+                    </div>
+
+                    <div class="slide_item" data-picturebox
+                        data-id="p5"
+                        data-url="./images/Photography/ChineseOldTownStreet.png"
+                        data-title="Chinese Old Town Street"
+                        data-desc="Placeholder"
+                        data-location="Pingjiang Road, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <img src="./images/Photography/ChineseOldTownStreet.png" class="slide_img" alt="Chinese Old Town Street">
+                        <div class="slide_info">
+                            <h3 class="big_title text-white fs-4 mb-1">Chinese Old Town Street</h3>
+                            <p class="mb-0 text-white-50 small"><i class="fas fa-map-marker-alt me-1"></i>Pingjiang Road, China</p>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="slide_btn prev_btn" aria-label="Previous slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slide_btn next_btn" aria-label="Next slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="dot_row"></div>
+        </section>
+    </section>
+
+    <section class="container mb-5">
+        <div class="ratings-box reveal" id="ratingsBox">
+            <div class="ratings-count">
+                You've rated <span id="ratedCount">0</span> of <span id="totalCount">0</span> photos
+            </div>
+            <div id="ratingsEmpty" class="ratings-empty">Rate a photo below to see your stats here.</div>
+            <div id="ratingsChart" style="display:none">
+                <div class="rating-chart-row">
+                    <span class="rating-chart-label">5 star</span>
+                    <div class="rating-chart-track"><div class="rating-chart-fill" id="chartFill5"></div></div>
+                    <span class="rating-chart-count" id="chartCount5">0</span>
+                </div>
+                <div class="rating-chart-row">
+                    <span class="rating-chart-label">4 star</span>
+                    <div class="rating-chart-track"><div class="rating-chart-fill" id="chartFill4"></div></div>
+                    <span class="rating-chart-count" id="chartCount4">0</span>
+                </div>
+                <div class="rating-chart-row">
+                    <span class="rating-chart-label">3 star</span>
+                    <div class="rating-chart-track"><div class="rating-chart-fill" id="chartFill3"></div></div>
+                    <span class="rating-chart-count" id="chartCount3">0</span>
+                </div>
+                <div class="rating-chart-row">
+                    <span class="rating-chart-label">2 star</span>
+                    <div class="rating-chart-track"><div class="rating-chart-fill" id="chartFill2"></div></div>
+                    <span class="rating-chart-count" id="chartCount2">0</span>
+                </div>
+                <div class="rating-chart-row">
+                    <span class="rating-chart-label">1 star</span>
+                    <div class="rating-chart-track"><div class="rating-chart-fill" id="chartFill1"></div></div>
+                    <span class="rating-chart-count" id="chartCount1">0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section pt-0">
+        <div class="container">
+            <div class="row g-4" id="galleryGrid">
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p1"
+                        data-url="./images/Photography/ChineseCanalTown.png"
+                        data-title="Chinese Canal Town"
+                        data-desc="Placeholder"
+                        data-location="Qili Mountain Tang, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ChineseCanalTown.png" alt="Chinese Canal Town">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Chinese Canal Town</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p1">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p2"
+                        data-url="./images/Photography/ShantangStreet.png"
+                        data-title="Shantang Street"
+                        data-desc="Placeholder"
+                        data-location="Qili Mountain Tang, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ShantangStreet.png" alt="Shantang Street">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Shantang Street</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p2">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p3"
+                        data-url="./images/Photography/ChineseOldTownStreet.png"
+                        data-title="Chinese Old Town Street"
+                        data-desc="Placeholder"
+                        data-location="Pingjiang Road, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ChineseOldTownStreet.png" alt="Chinese Old Town Street">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Chinese Old Town Street</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p3">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p4"
+                        data-url="./images/Photography/ChinesePavillion.png"
+                        data-title="Chinese Pavillion"
+                        data-desc="Placeholder"
+                        data-location="Saionji Temple, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ChinesePavillion.png" alt="Chinese Pavillion">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Chinese Pavillion</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p4">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p5"
+                        data-url="./images/Photography/ChinesePagoda.png"
+                        data-title="Chinese Pagoda"
+                        data-desc="Placeholder"
+                        data-location="Hanshan Temple, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ChinesePagoda.png" alt="Chinese Pagoda">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Chinese Pagoda</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p5">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p6"
+                        data-url="./images/Photography/ChineseCanalStreet.png"
+                        data-title="Chinese Canal Street"
+                        data-desc="Placeholder"
+                        data-location="Pingjiang Road, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ChineseCanalStreet.png" alt="Chinese Canal Street">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Chinese Canal Street</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p6">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p7"
+                        data-url="./images/Photography/ChineseBazzar.png"
+                        data-title="Chinese Bazzar"
+                        data-desc="Placeholder"
+                        data-location="Guanqian Street, China"
+                        data-date="June 2026"
+                        data-photographer="Zi Yu">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/ChineseBazzar.png" alt="Chinese Bazzar">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Chinese Bazzar</div>
+                            <div class="photo-card-sub">By Zi Yu &middot; June 2026</div>
+                            <div class="star-row" data-photo-id="p7">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p8"
+                        data-url="./images/Photography/MBS.png"
+                        data-title="Marina Bay Sands"
+                        data-desc="Placeholder"
+                        data-location="Marina Bay Sands, Singapore"
+                        data-date="December 2025"
+                        data-photographer="Kai Yang">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/MBS.png" alt="Marina Bay Sands">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Marina Bay Sands</div>
+                            <div class="photo-card-sub">By Kai Yang &middot; December 2025</div>
+                            <div class="star-row" data-photo-id="p8">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3 reveal">
+                    <div class="photo-card"
+                        data-id="p9"
+                        data-url="./images/Photography/MBSRestaurant.png"
+                        data-title="Marina Bay Sands Rooftop Restaurant"
+                        data-desc="Placeholder"
+                        data-location="Marina Bay Sands, Singapore"
+                        data-date="December 2025"
+                        data-photographer="Kai Yang">
+                        <div class="photo-card-img-wrap">
+                            <img src="./images/Photography/MBSRestaurant.png" alt="Marina Bay Sands Rooftop Restaurant">
+                        </div>
+                        <div class="photo-card-body">
+                            <div class="photo-card-title">Marina Bay Sands Rooftop Restaurant</div>
+                            <div class="photo-card-sub">By Kai Yang &middot; December 2025</div>
+                            <div class="star-row" data-photo-id="p9">
+                                <i class="fa-solid fa-star" data-value="1"></i>
+                                <i class="fa-solid fa-star" data-value="2"></i>
+                                <i class="fa-solid fa-star" data-value="3"></i>
+                                <i class="fa-solid fa-star" data-value="4"></i>
+                                <i class="fa-solid fa-star" data-value="5"></i>
+                                <span class="rating-note">rate this</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="credit-line">Hobby Website - Made by <span class="accent">Kai Yang &amp; Zi Yu</span></div>
+
+    <div class="modal fade" id="photoPopup" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered popup-dialog">
+            <div class="modal-content popup-content">
+                <div class="popup-img-wrap">
+                    <button type="button" class="popup-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <img id="popupImg" src="" alt="">
+                </div>
+                <div class="popup-body">
+                    <div class="popup-location"><i class="fa-solid fa-location-dot"></i><span id="popupLocation"></span></div>
+                    <h3 class="popup-title" id="popupTitle"></h3>
+                    <p class="popup-desc" id="popupDesc"></p>
+                    <div class="popup-meta">
+                        <span id="popupBy"></span>
+                        <span id="popupDate"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
