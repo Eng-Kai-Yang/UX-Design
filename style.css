@@ -189,9 +189,10 @@ a:hover{
 }
 
 .main-image img{
-    width:auto;
-    min-height:50vh;
-    max-height: 70vh;
+    width:100%;
+    height:auto;
+    max-height:70vh;
+    object-fit:cover;
     display:block;
     transition:transform 1.2s var(--ease);
 }
@@ -889,5 +890,14 @@ a:hover{
 
     .popup-title{
         font-size:1.35rem;
+    }
+
+    .main{
+        padding:5rem 0 3rem;
+        text-align:center;
+    }
+
+    .intro{
+        margin:auto;
     }
 }
