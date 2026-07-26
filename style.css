@@ -59,6 +59,12 @@ a:hover{
 
 .accent{
     color:var(--orange);
+    display: inline-block;
+    transition:transform 0.3s ease;
+}
+
+.accent:hover{
+    transform:scale(1.1);
 }
 
 .eyebrow{
