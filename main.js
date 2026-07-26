@@ -341,12 +341,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        dropdownMenu.querySelectorAll(".dropdown-item").forEach(item => {
+        dropdownMenu.querySelectorAll(".dropdownItem").forEach(item => {
             item.addEventListener("click", function () {
                 topicValue = item.dataset.value;
                 dropdownLabel.textContent = topicValue;
                 dropdownBtn.classList.add("filled");
-                dropdownMenu.querySelectorAll(".dropdown-item").forEach(el => {
+                dropdownMenu.querySelectorAll(".dropdownItem").forEach(el => {
                     el.classList.remove("selected");
                 });
                 item.classList.add("selected");
