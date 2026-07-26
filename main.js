@@ -93,16 +93,47 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!popup || typeof bootstrap === "undefined") {
             return;
         }
-        document.getElementById("popupImg").src = source.dataset.url || "";
-        document.getElementById("popupImg").alt = source.dataset.title || "";
+        const popupImg = document.getElementById("popupImg");
+        const popupContent = popup.querySelector(".popup-content");
+        const url = source.dataset.url || "";
         document.getElementById("popupLocation").textContent = source.dataset.location || "";
         document.getElementById("popupTitle").textContent = source.dataset.title || "";
         document.getElementById("popupDesc").textContent = source.dataset.desc || "";
         document.getElementById("popupBy").textContent = "By " + (source.dataset.photographer || "");
         document.getElementById("popupDate").textContent = source.dataset.date || "";
 
-        const modal = new bootstrap.Modal(popup);
-        modal.show();
+        function reveal() {
+            popup.style.removeProperty("display");
+            popup.style.removeProperty("visibility");
+            const modal = new bootstrap.Modal(popup);
+            modal.show();
+        }
+        if (!popupContent) {
+            popupImg.src = url;
+            popupImg.alt = source.dataset.title || "";
+            reveal();
+            return;
+        }
+        popupContent.style.width = "";
+        popup.style.display = "block";
+        popup.style.visibility = "hidden";
+        let settled = false;
+        function finish() {
+            if (settled) {
+                return;
+            }
+            settled = true;
+            popupContent.style.width = popupImg.getBoundingClientRect().width + "px";
+            reveal();
+        }
+        popupImg.onload = finish;
+        popupImg.onerror = finish;
+        popupImg.src = url;
+        popupImg.alt = source.dataset.title || "";
+        if (popupImg.complete) {
+            finish();
+        }
+        setTimeout(finish, 1500);
     }
 
     function setupGallery() {
