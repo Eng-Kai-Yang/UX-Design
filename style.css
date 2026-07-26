@@ -79,20 +79,13 @@ a:hover{
     margin-bottom:1rem;
 }
 
-.eyebrow::before{
-    content:"";
-    width:25px;
-    height:1px;
-    background:var(--orange-deep);
-}
-
+.eyebrow::before,
 .eyebrow::after{
     content:"";
     width:25px;
     height:1px;
     background:var(--orange-deep);
 }
-
 
 .text-faint{
     color:var(--text-faint);
@@ -303,6 +296,12 @@ a:hover{
 
 .credit-line .accent{
     color:var(--orange-deep);
+    display: inline-block;
+    transition:transform 0.3s ease;
+}
+
+.credit-line .accent:hover{
+    transform:scale(1.05);
 }
 
 .ripple{
