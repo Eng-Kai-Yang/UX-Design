@@ -52,14 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function navbarShadow() {
         const navbar = document.querySelector(".topnav");
         if (!navbar) return;
-
         window.addEventListener("scroll", () => {
-            if (window.scrollY > 12) {
-                navbar.style.boxShadow =
-                    "0 10px 30px -18px rgba(0,0,0,0.15)";
-            } else {
-                navbar.style.boxShadow = "none";
-            }
+            if (window.scrollY > 12) navbar.style.boxShadow = "0 10px 30px -18px rgba(0,0,0,0.2)";
+            else navbar.style.boxShadow = "none";
         });
     }
 
@@ -182,9 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
             counts[v] = (counts[v] || 0) + 1;
         });
         let maxCount = 1;
-        for (const key in counts) {
-            if (counts[key] > maxCount) maxCount = counts[key];
-        }
+        for (const key in counts) if (counts[key] > maxCount) maxCount = counts[key];
         for (let star = 1; star <= 5; star++) {
             const fill = document.getElementById("chartFill" + star);
             const count = document.getElementById("chartCount" + star);
@@ -390,9 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             starsHtml += ' <span class="text-faint" style="font-size:.75rem">(' + rating + '/5)</span>';
             ratingEl.innerHTML = starsHtml;
-        } else {
-            ratingEl.textContent = "Not rated";
-        }
+        } else ratingEl.textContent = "Not rated";
         const anotherBtn = document.getElementById("anotherBtn");
         if (anotherBtn) {
             anotherBtn.addEventListener("click", () => {
