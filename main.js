@@ -80,6 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 toggler.classList.remove("collapsed");
             }
         });
+        document.querySelectorAll(".topnav-link").forEach(link => {
+            link.addEventListener("click", (e) => {
+                if (navMenu.classList.contains("open")) {
+                    e.preventDefault();
+                    const destination = link.href;
+                    toggler.classList.add("collapsed");
+                    navMenu.classList.remove("open");
+                    setTimeout(() => {
+                        window.location.href = destination;
+                    }, 200);
+                }
+            });
+        });
     }
 
     function loadRatings() {
