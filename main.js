@@ -1,17 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const currentPage =
-        window.location.pathname.split("/").pop() || "index.html";
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll(".topnav-link").forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
-            link.classList.add("active");
-        }
+        if (link.getAttribute("href") === currentPage) link.classList.add("active");
     });
 
     function showReveal() {
         const revealItems = document.querySelectorAll(".reveal");
-        if (!revealItems.length) {
-            return;
-        }
+        if (!revealItems.length) return;
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -32,9 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ".btn-glow, .btn-outline-glow"
         );
         buttons.forEach(button => {
-            if (button.dataset.rippleAdded) {
-                return;
-            }
+            if (button.dataset.rippleAdded) return;
             button.dataset.rippleAdded = "true";
             button.addEventListener("click", function (event) {
                 const circle = document.createElement("span");
@@ -58,9 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function navbarShadow() {
         const navbar = document.querySelector(".topnav");
-        if (!navbar) {
-            return;
-        }
+        if (!navbar) return;
 
         window.addEventListener("scroll", () => {
             if (window.scrollY > 12) {
@@ -90,9 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function openPhotoPopup(source) {
         const popup = document.getElementById("photoPopup");
-        if (!popup || typeof bootstrap === "undefined") {
-            return;
-        }
+        if (!popup || typeof bootstrap === "undefined") return;
         const popupImg = document.getElementById("popupImg");
         const popupContent = popup.querySelector(".popup-content");
         const url = source.dataset.url || "";
@@ -119,9 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         popup.style.visibility = "hidden";
         let settled = false;
         function finish() {
-            if (settled) {
-                return;
-            }
+            if (settled) return;
             settled = true;
             popupContent.style.width = popupImg.getBoundingClientRect().width + "px";
             reveal();
@@ -130,17 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
         popupImg.onerror = finish;
         popupImg.src = url;
         popupImg.alt = source.dataset.title || "";
-        if (popupImg.complete) {
-            finish();
-        }
+        if (popupImg.complete) finish();
         setTimeout(finish, 1500);
     }
 
     function setupGallery() {
         const grid = document.getElementById("galleryGrid");
-        if (!grid) {
-            return;
-        }
+        if (!grid) return;
         const ratings = loadRatings();
 
         document.querySelectorAll(".star-row").forEach(row => {
@@ -151,9 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 star.classList.toggle("filled", parseInt(star.dataset.value, 10) <= current);
             });
             const note = row.querySelector(".rating-note");
-            if (note) {
-                note.textContent = current ? current + "/5" : "rate this";
-            }
+            if (note) note.textContent = current ? current + "/5" : "rate this";
 
             stars.forEach(function (star) {
                 star.addEventListener("click", event => {
@@ -163,9 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     stars.forEach(s => {
                         s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= value);
                     });
-                    if (note) {
-                        note.textContent = value + "/5";
-                    }
+                    if (note) note.textContent = value + "/5";
                     updateRatingsChart();
                 });
             });
@@ -173,21 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelectorAll(".photo-card").forEach(card => {
             card.addEventListener("click", event => {
-                if (event.target.closest(".star-row")) {
-                    return;
-                }
+                if (event.target.closest(".star-row")) return;
                 openPhotoPopup(card);
             });
         });
-
         updateRatingsChart();
     }
 
     function updateRatingsChart() {
         const box = document.getElementById("ratingsBox");
-        if (!box) {
-            return;
-        }
+        if (!box) return;
         const totalPhotos = document.querySelectorAll(".photo-card").length;
         const ratings = loadRatings();
         const values = Object.values(ratings);
@@ -209,9 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         let maxCount = 1;
         for (const key in counts) {
-            if (counts[key] > maxCount) {
-                maxCount = counts[key];
-            }
+            if (counts[key] > maxCount) maxCount = counts[key];
         }
         for (let star = 1; star <= 5; star++) {
             const fill = document.getElementById("chartFill" + star);
@@ -225,9 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setupSlider() {
         const slideContainer = document.querySelector(".slide_box");
-        if (!slideContainer) {
-            return;
-        }
+        if (!slideContainer) return;
         const slides = document.querySelector(".slide_row");
         const slideItems = document.querySelectorAll(".slide_item");
         slideItems.forEach(item => {
@@ -238,9 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const indicatorsContainer = document.querySelector(".dot_row");
         let currentIndex = 0;
         const totalSlides = slideItems.length;
-        if (!totalSlides) {
-            return;
-        }
+        if (!totalSlides) return;
         if (indicatorsContainer) {
             for (let i = 0; i < totalSlides; i++) {
                 const indicator = document.createElement("button");
@@ -254,15 +222,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const indicators = document.querySelectorAll(".dot_item");
 
         function updateContainer() {
-            if (slides) {
-                slides.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
-            }
+            if (slides) slides.style.transform = "translateX(-" + (currentIndex * 100) + "%)";
             indicators.forEach((ind, index) => {
-                if (index === currentIndex) {
-                    ind.classList.add("active");
-                } else {
-                    ind.classList.remove("active");
-                }
+                if (index === currentIndex) ind.classList.add("active");
+                else ind.classList.remove("active");
             });
         }
 
@@ -295,17 +258,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function setupFeedbackForm() {
         const feedbackKey = "hobbysite_last_feedback";
         const form = document.getElementById("feedbackForm");
-        if (!form) {
-            return;
-        }
+        if (!form) return;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         function setFieldState(input, errorEl, valid) {
             input.classList.toggle("is-invalid", !valid);
             input.classList.toggle("is-valid", valid);
-            if (errorEl) {
-                errorEl.classList.toggle("show", !valid);
-            }
+            if (errorEl) errorEl.classList.toggle("show", !valid);
         }
 
         const nameInput = document.getElementById("fbName");
@@ -336,17 +295,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         document.addEventListener("click", event => {
-            if (!dropdownBox.contains(event.target)) {
-                dropdownBox.classList.remove("open");
-            }
+            if (!dropdownBox.contains(event.target)) dropdownBox.classList.remove("open");
         });
 
-        dropdownMenu.querySelectorAll(".dropdownItem").forEach(item => {
+        dropdownMenu.querySelectorAll(".dropdown-item").forEach(item => {
             item.addEventListener("click", function () {
                 topicValue = item.dataset.value;
                 dropdownLabel.textContent = topicValue;
                 dropdownBtn.classList.add("filled");
-                dropdownMenu.querySelectorAll(".dropdownItem").forEach(el => {
+                dropdownMenu.querySelectorAll(".dropdown-item").forEach(el => {
                     el.classList.remove("selected");
                 });
                 item.classList.add("selected");
@@ -386,9 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setFieldState(messageInput, messageError, messageValid);
             dropdownBtn.classList.toggle("is-invalid", !topicValid);
             dropdownError.classList.toggle("show", !topicValid);
-            if (!nameValid || !emailValid || !messageValid || !topicValid) {
-                return;
-            }
+            if (!nameValid || !emailValid || !messageValid || !topicValid) return;
 
             sessionStorage.setItem(feedbackKey, JSON.stringify({
                 name: name,
@@ -404,9 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setupFeedbackDetails() {
         const wrap = document.getElementById("ticketWrap");
-        if (!wrap) {
-            return;
-        }
+        if (!wrap) return;
         const feedbackKey = "hobbysite_last_feedback";
         const raw = sessionStorage.getItem(feedbackKey);
         if (!raw) {
