@@ -59,7 +59,7 @@ a:hover{
 
 .accent{
     color:var(--orange);
-    display: inline-block;
+    display:inline-block;
     transition:transform 0.3s ease;
 }
 
@@ -99,7 +99,7 @@ a:hover{
     position:sticky;
     top:0;
     z-index:1000;
-    transition: box-shadow 0.45s ease;
+    transition:box-shadow 0.45s ease;
 }
 
 .title{
@@ -168,7 +168,54 @@ a:hover{
 }
 
 .navbar-toggler{
-    border-color:var(--border-strong);
+    position:relative;
+    width:28px;
+    height:28px;
+    padding:0;
+    background:transparent;
+    border:none;
+    box-shadow:none!important;
+    outline:none!important;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active{
+    box-shadow:none!important;
+    outline:none!important;
+}
+
+.navbar-toggler span{
+    position:absolute;
+    left:0;
+    width:100%;
+    height:3px;
+    background:var(--orange-deep);
+    border-radius:999px;
+    transition:all .3s var(--ease);
+}
+
+.navbar-toggler span:nth-child(1){
+    top:5px;
+}
+
+.navbar-toggler span:nth-child(2){
+    top:12px;
+}
+
+.navbar-toggler span:nth-child(3){
+    top:19px;
+}
+
+.navbar-toggler:not(.collapsed) span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.navbar-toggler:not(.collapsed) span:nth-child(2){
+    opacity:0;
+}
+
+.navbar-toggler:not(.collapsed) span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
 }
 
 .main{
@@ -297,7 +344,7 @@ a:hover{
 
 .credit-line .accent{
     color:var(--orange-deep);
-    display: inline-block;
+    display:inline-block;
     transition:transform 0.3s ease;
 }
 
@@ -867,43 +914,6 @@ a:hover{
     min-width:6.5rem;
 }
 
-.float_btn{
-    position:fixed;
-    bottom:1.5rem;
-    right:1.5rem;
-    z-index:1050;
-    display:flex;
-    align-items:center;
-    gap:.55rem;
-    padding:.8rem 1.3rem;
-    border-radius:999px;
-    background:linear-gradient(135deg,var(--orange),var(--orange-deep));
-    color:#fff;
-    border:1px solid rgba(255,255,255,.2);
-    font-family:'Space Mono',monospace;
-    font-size:.75rem;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.08em;
-    box-shadow:var(--shadow);
-    transition:transform .6s var(--ease), box-shadow .6s var(--ease), filter .6s var(--ease);
-}
-
-.float_btn:hover{
-    color:#fff;
-    transform:translateY(-4px);
-    box-shadow:0 14px 35px -12px rgba(193,68,14,.6);
-    filter:brightness(1.05);
-}
-
-.float_btn i{
-    font-size:1rem;
-}
-
-.float_btn:active{
-    transform:translateY(-1px);
-}
-
 @keyframes ripple-anim{
     to{
         transform:scale(3.2);
@@ -925,7 +935,7 @@ a:hover{
     }
 }
 
-@media (max-width:767px){
+@media (max-width:992px){
     .main{
         padding:5rem 0 3rem;
         text-align:center;
@@ -958,5 +968,70 @@ a:hover{
 
     .intro{
         margin:auto;
+    }
+
+    .navbar-collapse {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        display:flex !important;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:center;
+        padding-top:110px;
+        background:
+            radial-gradient(1200px 600px at 15% -10%, rgba(255,122,41,.10), transparent 60%),
+            radial-gradient(900px 500px at 100% 0%, rgba(255,161,92,.14), transparent 55%),
+            var(--bg);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity .2s ease, visibility .2s ease;
+        z-index:999;
+    }
+
+    .navbar-collapse.open {
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+    }
+
+    .navbar-collapse.collapse {
+        display:flex !important;
+    }
+
+    .collapsing {
+        height:100vh !important;
+        display:flex !important;
+        flex-direction:column;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:none !important;
+    }
+
+    .navbar-nav {
+        width:100%;
+        align-items:center;
+        gap:1.5rem;
+    }
+
+    .navbar-nav .nav-item {
+        width:100%;
+        text-align:center;
+    }
+
+    .navbar-nav .topnav-link {
+        display:inline-block;
+        font-size:1.6rem;
+        padding:.75rem 2rem !important;
+    }
+
+    .title,
+    .navbar-toggler {
+        position:relative;
+        z-index:1001;
     }
 }

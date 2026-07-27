@@ -58,6 +58,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function mobileNavMenu() {
+        const navMenu = document.getElementById("navMenu");
+        const toggler = document.querySelector(".navbar-toggler");
+        if (!navMenu || !toggler) return;
+        toggler.addEventListener("click", () => {
+            const isOpen = navMenu.classList.contains("open");
+            if (isOpen) {
+                navMenu.classList.remove("open");
+                toggler.classList.add("collapsed");
+                setTimeout(() => {
+                    navMenu.style.visibility = "hidden";
+                    navMenu.style.pointerEvents = "none";
+                }, 200);
+            } else {
+                navMenu.style.visibility = "visible";
+                navMenu.style.pointerEvents = "auto";
+                requestAnimationFrame(() => {
+                    navMenu.classList.add("open");
+                });
+                toggler.classList.remove("collapsed");
+            }
+        });
+    }
+
     function loadRatings() {
         try {
             const ratingsKey = "hobbysite_ratings";
@@ -400,6 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     safeRun(showReveal);
+    safeRun(mobileNavMenu);
     safeRun(buttonRipple);
     safeRun(navbarShadow);
     safeRun(setupGallery);
