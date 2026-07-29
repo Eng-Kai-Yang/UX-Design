@@ -109,11 +109,12 @@
 
     <section class="container mb-5">
         <div class="ratings-box reveal" id="ratingsBox">
-            <div class="ratings-count">
-                You've rated <span id="ratedCount">0</span> of <span id="totalCount">0</span> photos
+            <div class="ratings-header">
+                <div class="ratings-count">You've rated <span id="ratedCount">0</span> of <span id="totalCount">0</span> photos</div>
+                <button type="button" class="clear-ratings-btn" id="clearRatingsBtn"><i class="fa-solid fa-rotate-left me-1"></i>Clear ratings</button>
             </div>
-            <div id="ratingsEmpty" class="ratings-empty">Rate a photo below to see your stats here.</div>
-            <div id="ratingsChart" style="display:none">
+            <div id="ratingsEmpty" class="ratings-empty ratings-anim">Rate a photo below to see your stats here.</div>
+            <div id="ratingsChart" class="ratings-anim">
                 <div class="rating-chart-row">
                     <span class="rating-chart-label">5 star</span>
                     <div class="rating-chart-track"><div class="rating-chart-fill" id="chartFill5"></div></div>

@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadRatings() {
         try {
-            const ratingsKey = "hobbysite_ratings";
+            const ratingsKey = "photography_ratings";
             return JSON.parse(localStorage.getItem(ratingsKey)) || {};
         } catch (e) {
             return {};
@@ -105,10 +105,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function saveRating(photoId, value) {
-        const ratingsKey = "hobbysite_ratings";
+        const ratingsKey = "photography_ratings";
         const ratings = loadRatings();
         ratings[photoId] = value;
         localStorage.setItem(ratingsKey, JSON.stringify(ratings));
+    }
+
+    function deleteRating(photoId) {
+        const ratingsKey = "photography_ratings";
+        const ratings = loadRatings();
+        delete ratings[photoId];
+        localStorage.setItem(ratingsKey, JSON.stringify(ratings));
+    }
+
+    function clearAllRatings() {
+        localStorage.removeItem("photography_ratings");
+    }
+
+    function setPanelVisible(panel, visible) {
+        if (!panel) return;
+        if (visible) {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            panel.style.opacity = "1";
+        } else {
+            panel.style.maxHeight = "0px";
+            panel.style.opacity = "0";
+        }
+    }
+
+    function renderStarRow(row) {
+        const current = parseInt(row.dataset.current, 10) || 0;
+        const stars = row.querySelectorAll("i");
+        stars.forEach(s => {
+            s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= current);
+        });
+        const note = row.querySelector(".rating-note");
+        if (note) note.textContent = current ? current + "/5" : "rate this";
     }
 
     function openPhotoPopup(source) {
@@ -160,23 +192,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelectorAll(".star-row").forEach(row => {
             const photoId = row.dataset.photoId;
-            const current = ratings[photoId] || 0;
+            row.dataset.current = ratings[photoId] || 0;
+            renderStarRow(row);
             const stars = row.querySelectorAll("i");
-            stars.forEach(function (star) {
-                star.classList.toggle("filled", parseInt(star.dataset.value, 10) <= current);
-            });
-            const note = row.querySelector(".rating-note");
-            if (note) note.textContent = current ? current + "/5" : "rate this";
-
-            stars.forEach(function (star) {
+            stars.forEach(star => {
                 star.addEventListener("click", event => {
                     event.stopPropagation();
                     const value = parseInt(star.dataset.value, 10);
-                    saveRating(photoId, value);
-                    stars.forEach(s => {
-                        s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= value);
-                    });
-                    if (note) note.textContent = value + "/5";
+                    const current = parseInt(row.dataset.current, 10) || 0;
+                    if (value === current) {
+                        deleteRating(photoId);
+                        row.dataset.current = 0;
+                    } else {
+                        saveRating(photoId, value);
+                        row.dataset.current = value;
+                    }
+                    renderStarRow(row);
                     updateRatingsChart();
                 });
             });
@@ -202,13 +233,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("totalCount").textContent = totalPhotos;
         const chartWrap = document.getElementById("ratingsChart");
         const emptyMsg = document.getElementById("ratingsEmpty");
+        const clearBtn = document.getElementById("clearRatingsBtn");
+        if (clearBtn) clearBtn.classList.toggle("is-visible", total > 0);
+        if (clearBtn) {
+            clearBtn.addEventListener("click", () => {
+                clearAllRatings();
+                document.querySelectorAll(".star-row").forEach(row => {
+                    row.dataset.current = 0;
+                    renderStarRow(row);
+                });
+                updateRatingsChart();
+            });
+        }
         if (total === 0) {
-            chartWrap.style.display = "none";
-            emptyMsg.style.display = "block";
+            setPanelVisible(chartWrap, false);
+            setPanelVisible(emptyMsg, true);
             return;
         }
-        chartWrap.style.display = "block";
-        emptyMsg.style.display = "none";
+        setPanelVisible(emptyMsg, false);
         const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
         values.forEach(v => {
             counts[v] = (counts[v] || 0) + 1;
@@ -223,6 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 count.textContent = counts[star];
             }
         }
+        setPanelVisible(chartWrap, true);
     }
 
     function setupSlider() {
@@ -286,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setupFeedbackForm() {
-        const feedbackKey = "hobbysite_last_feedback";
+        const feedbackKey = "feedback_details";
         const form = document.getElementById("feedbackForm");
         if (!form) return;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -390,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function setupFeedbackDetails() {
         const wrap = document.getElementById("ticketWrap");
         if (!wrap) return;
-        const feedbackKey = "hobbysite_last_feedback";
+        const feedbackKey = "feedback_details";
         const raw = sessionStorage.getItem(feedbackKey);
         if (!raw) {
             window.location.replace("feedback.html");
