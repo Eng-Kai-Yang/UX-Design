@@ -1101,3 +1101,19 @@ a:hover{
         z-index:1001;
     }
 }
+
+@media (max-width:400px){
+    .btn-glow,
+    .btn-outline-glow{
+        padding:.6rem 1.1rem;
+        font-size:.9rem;
+    }
+
+    .d-flex.flex-wrap.gap-3{
+        gap:.6rem !important;
+    }
+
+    .intro{
+        max-width:20rem;
+    }
+}
