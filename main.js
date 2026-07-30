@@ -95,6 +95,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function setupImageSkeletons() {
+        const targets = document.querySelectorAll(
+            ".photo-card-img-wrap img, .popup-img-wrap img, .slide_item img, .main-image img"
+        );
+        targets.forEach(img => {
+            if (img.closest(".skeleton-img")) return;
+            const wrap = document.createElement("div");
+            wrap.className = "skeleton-img";
+            img.parentNode.insertBefore(wrap, img);
+            wrap.appendChild(img);
+            function markLoaded() {
+                wrap.classList.add("loaded");
+            }
+            if (img.complete && img.naturalWidth > 0) {
+                markLoaded();
+            } else {
+                img.addEventListener("load", markLoaded);
+                img.addEventListener("error", markLoaded);
+            }
+        });
+    }
+
     function loadRatings() {
         try {
             const ratingsKey = "photography_ratings";
@@ -148,13 +170,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!popup || typeof bootstrap === "undefined") return;
         const popupImg = document.getElementById("popupImg");
         const popupContent = popup.querySelector(".popup-content");
+        const popupSkelWrap = popupImg.closest(".img-skel");
         const url = source.dataset.url || "";
+        if (popupSkelWrap) popupSkelWrap.classList.remove("loaded");
         document.getElementById("popupLocation").textContent = source.dataset.location || "";
         document.getElementById("popupTitle").textContent = source.dataset.title || "";
         document.getElementById("popupDesc").textContent = source.dataset.desc || "";
         document.getElementById("popupBy").textContent = "By " + (source.dataset.photographer || "");
         document.getElementById("popupDate").textContent = source.dataset.date || "";
-
         function reveal() {
             popup.style.removeProperty("display");
             popup.style.removeProperty("visibility");
@@ -174,6 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
         function finish() {
             if (settled) return;
             settled = true;
+            if (popupSkelWrap) popupSkelWrap.classList.add("loaded");
             popupContent.style.width = popupImg.getBoundingClientRect().width + "px";
             reveal();
         }
