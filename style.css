@@ -1213,6 +1213,18 @@ a:hover{
         font-size:.7rem;
     }
 
+    .lost-wrap .btn-glow,
+    .lost-wrap .btn-outline-glow{
+        margin:auto;
+        padding:1rem 1.1rem;
+        font-size:.8rem;
+    }
+
+    .lost-wrap{
+        padding-bottom:.9rem;
+        padding-top:.9rem;
+    }
+
     .d-flex.flex-wrap.gap-3{
         gap:.6rem !important;
     }
