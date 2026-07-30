@@ -371,22 +371,39 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!dropdownBox.contains(event.target)) dropdownBox.classList.remove("open");
         });
 
+        const otherDiv = document.getElementById("fbTopicOthers");
+        const otherInput = document.getElementById("fbTopicOther");
         dropdownMenu.querySelectorAll(".dropdown-item").forEach(item => {
             item.addEventListener("click", function () {
-                topicValue = item.dataset.value;
-                dropdownLabel.textContent = topicValue;
+                const selected = item.dataset.value;
+                dropdownLabel.textContent = selected;
                 dropdownBtn.classList.add("filled");
                 dropdownMenu.querySelectorAll(".dropdown-item").forEach(el => {
                     el.classList.remove("selected");
                 });
                 item.classList.add("selected");
                 dropdownBox.classList.remove("open");
+                if (selected === "Something else") {
+                    otherDiv.classList.add("is-visible");
+                    setTimeout(() => otherInput.focus(), 300);
+                    topicValue = otherInput.value.trim();
+                } else {
+                    otherDiv.classList.remove("is-visible");
+                    otherInput.value = "";
+                    topicValue = selected;
+                }
+
+                dropdownBtn.classList.toggle("is-valid", topicValue.length > 0);
                 dropdownBtn.classList.remove("is-invalid");
-                dropdownBtn.classList.add("is-valid");
-                dropdownError.classList.remove("show");
+                if (topicValue.length > 0) dropdownError.classList.remove("show");
             });
         });
-
+        otherInput.addEventListener("input", () => {
+            topicValue = otherInput.value.trim();
+            otherInput.classList.toggle("is-valid", topicValue.length > 0);
+            dropdownBtn.classList.toggle("is-valid", topicValue.length > 0);
+            if (topicValue.length > 0) dropdownError.classList.remove("show");
+        });
         const stars = document.querySelectorAll("#fbRatingPicker i");
         const ratingHiddenValue = document.getElementById("fbRatingValue");
         const ratingHelp = document.getElementById("fbRatingHelp");

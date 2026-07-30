@@ -919,6 +919,45 @@ a:hover{
     font-weight:600;
 }
 
+.dropdown-others{
+    overflow:hidden;
+    max-height:0;
+    opacity:0;
+    transform:translateY(-6px);
+    transition:max-height .4s var(--ease), opacity .35s ease, transform .35s var(--ease), margin-top .4s var(--ease);
+    margin-top:0;
+    padding:.25rem;
+    margin-left:-.25rem;
+    margin-right:-.25rem;
+    width:calc(100% + .5rem);
+}
+
+.dropdown-others.is-visible{
+    max-height:90px;
+    opacity:1;
+    transform:translateY(0);
+    margin-top:.6rem;
+}
+
+#fbTopicOther:invalid{
+    box-shadow:none;
+    border-color:var(--border);
+}
+
+#fbTopicOther.is-valid:focus{
+    box-shadow:0 0 0 .2rem rgba(47,158,92,.18);
+    border-color:#2f9e5c;
+}
+
+#fbTopicOther.is-valid{
+    border-color:#2f9e5c;
+}
+
+#fbTopicOther:focus:invalid{
+    border-color:var(--orange);
+    box-shadow:0 0 0 .2rem rgba(255,122,41,.18);
+}
+
 .rating-picker{
     display:flex;
     gap:.5rem;
