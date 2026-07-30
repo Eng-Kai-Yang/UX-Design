@@ -1009,6 +1009,69 @@ a:hover{
     white-space:nowrap;
 }
 
+.lost-wrap{
+    padding:6rem 0 5rem;
+    text-align:center;
+}
+
+.polaroid{
+    display:inline-block;
+    background:#fff8ec;
+    border:1px solid var(--border);
+    border-radius:6px;
+    padding:1rem 1rem 2.2rem;
+    box-shadow:var(--shadow);
+    transform:rotate(-6deg);
+    transition:transform .4s var(--ease);
+    margin-bottom:2.5rem;
+}
+
+.polaroid:hover{
+    transform:rotate(-2deg) scale(1.03);
+}
+
+.polaroid-frame{
+    width:220px;
+    height:220px;
+    background:linear-gradient(135deg, var(--surface-2), var(--surface));
+    border:1px dashed var(--border-strong);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--orange);
+    position:relative;
+    overflow:hidden;
+}
+
+.polaroid-frame i{
+    font-size:3.5rem;
+    opacity:.5;
+}
+
+.polaroid-caption{
+    font-family:'Space Mono',monospace;
+    font-size:.75rem;
+    color:var(--text-faint);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    margin-top:1rem;
+    text-align:center;
+}
+
+.lost-title{
+    font-size:clamp(2.2rem,5vw,3.4rem);
+    line-height:1.05;
+    margin-bottom:1rem;
+}
+
+.lost-sub{
+    font-size:1.1rem;
+    color:var(--text-dim);
+    max-width:32rem;
+    margin:0 auto 2.5rem;
+}
+
 @keyframes ripple-anim{
     to{
         transform:scale(3.2);
@@ -1156,5 +1219,13 @@ a:hover{
 
     .intro{
         max-width:20rem;
+    }
+
+    .polaroid-frame{
+        width:170px;
+        height:170px;
+    }
+    .polaroid-frame i{
+        font-size:2.6rem;
     }
 }
