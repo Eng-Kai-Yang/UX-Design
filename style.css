@@ -1220,6 +1220,8 @@ a:hover{
         font-size:.8rem;
     }
 
+    .main,
+    .section,
     .lost-wrap{
         padding-bottom:.9rem;
         padding-top:.9rem;
