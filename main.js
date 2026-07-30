@@ -448,8 +448,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         document.getElementById("ticketName").textContent = data.name || "-";
         document.getElementById("ticketEmail").textContent = data.email || "-";
-        document.getElementById("ticketDescription").textContent =
-            "Regarding " + (data.topic || "general thoughts") + ": " + (data.message || "-");
+        document.getElementById("ticketSubject").textContent = data.topic || "general thoughts";
+        document.getElementById("ticketDescription").textContent = data.message || "-";
         const submitted = data.submittedAt ? new Date(data.submittedAt) : new Date();
         const dateStr = submitted.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
         const timeStr = submitted.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });

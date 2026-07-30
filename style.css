@@ -570,7 +570,7 @@ a:hover{
     text-transform:uppercase;
     letter-spacing:.06em;
     cursor:pointer;
-    transition:.25s, max-height .6s var(--ease), opacity .45s ease;
+    transition:.25s, max-height .3s var(--ease), opacity .45s ease;
     flex-shrink:0;
     overflow:hidden;
     max-height:0;
@@ -944,11 +944,18 @@ a:hover{
     min-height:17.5vh;
 }
 
+.row.justify-content-center > .col-lg-7{
+    min-width:0;
+}
+
 .ticket{
     background:linear-gradient(var(--surface),var(--surface-2));
     border:1px dashed var(--border-strong);
     border-radius:var(--radius);
     padding:2.5rem;
+    min-width:0;
+    width:95%;
+    margin: 5% auto 5% auto;
 }
 
 .ticket-stamp{
@@ -967,25 +974,39 @@ a:hover{
     line-height:1.1;
 }
 
-.detail-row{
-    display:flex;
-    gap:.6rem;
+.detail-table{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    table-layout:fixed;
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+.detail-table td{
     padding:.4rem 0;
     font-size:.92rem;
+    vertical-align:top;
+    line-height:1.4;
+    min-width:0;
+    overflow-wrap:anywhere;
 }
 
-.detail-row i{
+.detail-table .detail-icon{
     width:1.2rem;
     color:var(--orange-deep);
+    padding-right:.6rem;
 }
 
-.detail-label{
+.detail-table .detail-label{
     color:var(--text-faint);
     font-family:'Space Mono',monospace;
     font-size:.7rem;
     text-transform:uppercase;
     letter-spacing:.1em;
-    min-width:6.5rem;
+    width:6.5rem;
+    padding-right:.6rem;
+    white-space:nowrap;
 }
 
 @keyframes ripple-anim{
@@ -1006,6 +1027,11 @@ a:hover{
 @media (min-width:992px){
     .popup-dialog{
         max-width:80vw;
+    }
+
+    .ticket{
+        max-width:45%;
+        margin: 1% auto 1% auto;
     }
 }
 
@@ -1115,6 +1141,13 @@ a:hover{
     .btn-outline-glow{
         padding:.6rem 1.1rem;
         font-size:.9rem;
+    }
+
+    .ticket .btn-glow,
+    .ticket .btn-outline-glow{
+        margin:auto;
+        padding:.6rem 1.1rem;
+        font-size:.7rem;
     }
 
     .d-flex.flex-wrap.gap-3{
