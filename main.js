@@ -95,6 +95,107 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function setupCategoryFilters() {
+        const grid = document.getElementById("galleryGrid");
+        const filterRow = document.getElementById("categoryFilters");
+        if (!grid || !filterRow) return;
+        const items = Array.from(grid.children);
+        const categories = new Set();
+        items.forEach(item => {
+            const card = item.querySelector(".photo-card");
+            const url = card ? card.dataset.url || "" : "";
+            const match = url.match(/images\/([^/]+)\//i);
+            item.dataset.category = match ? match[1] : "Other";
+            categories.add(item.dataset.category);
+        });
+        Array.from(categories).sort().reverse().forEach(cat => {
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "filter-btn";
+            btn.textContent = cat;
+            btn.dataset.filter = cat;
+            filterRow.appendChild(btn);
+        });
+        let animating = false;
+        const HIDE_STAGGER = 45;
+        const HIDE_DURATION = 320;
+        const SHOW_STAGGER = 45;
+        const SHOW_DURATION = 350;
+        const FLIP_DURATION = 500;
+        filterRow.addEventListener("click", event => {
+            const btn = event.target.closest(".filter-btn");
+            if (!btn || animating) return;
+            filterRow.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            applyFilter(btn.dataset.filter);
+        });
+        function applyFilter(filter) {
+            const toHide = []
+            const toShow = []
+            const staying = [];
+            items.forEach(item => {
+                const shouldShow = filter === "all" || item.dataset.category === filter;
+                const isHidden = item.classList.contains("filter-hidden");
+                if (shouldShow && isHidden) toShow.push(item);
+                else if (!shouldShow && !isHidden) toHide.push(item);
+                else if (shouldShow && !isHidden) staying.push(item);
+            });
+            if (!toHide.length && !toShow.length) return;
+            animating = true;
+            toHide.forEach((item, i) => {
+                item.style.transitionDelay = (i * HIDE_STAGGER) + "ms";
+                item.classList.add("filter-hide");
+            });
+            const hideTotalTime = toHide.length ? (toHide.length - 1) * HIDE_STAGGER + HIDE_DURATION : 0;
+            setTimeout(() => {
+                const flipItems = staying.concat(toShow);
+                const firstRects = new Map();
+                flipItems.forEach(item => firstRects.set(item, item.getBoundingClientRect()));
+                toHide.forEach(item => {
+                    item.classList.add("filter-hidden");
+                    item.style.transitionDelay = "";
+                });
+                toShow.forEach(item => {
+                    item.classList.remove("filter-hidden");
+                    item.classList.add("filter-hide");
+                });
+                void grid.offsetWidth;
+                const lastRects = new Map();
+                flipItems.forEach(item => lastRects.set(item, item.getBoundingClientRect()));
+                staying.forEach(item => {
+                    const first = firstRects.get(item);
+                    const last = lastRects.get(item);
+                    const dx = first.left - last.left
+                    const dy = first.top - last.top;
+                    if (dx || dy) {
+                        item.style.transition = "none";
+                        item.style.transform = `translate(${dx}px, ${dy}px)`;
+                        void item.offsetWidth;
+                    }
+                });
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        staying.forEach(item => {
+                            item.style.transition = `transform ${FLIP_DURATION}ms var(--ease)`;
+                            item.style.transform = "";
+                        });
+                        toShow.forEach((item, i) => {
+                            item.style.transitionDelay = (i * SHOW_STAGGER) + "ms";
+                            void item.offsetWidth;
+                            item.classList.remove("filter-hide");
+                        });
+                        const showTotalTime = toShow.length ? (toShow.length - 1) * SHOW_STAGGER + SHOW_DURATION : 0;
+                        setTimeout(() => {
+                            staying.forEach(item => { item.style.transition = ""; item.style.transform = ""; });
+                            toShow.forEach(item => { item.style.transitionDelay = ""; });
+                            animating = false;
+                        }, Math.max(showTotalTime, FLIP_DURATION) + 50);
+                    });
+                });
+            }, hideTotalTime + 30);
+        }
+    }
+
     function loadRatings() {
         try {
             const ratingsKey = "photography_ratings";
@@ -500,6 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
     safeRun(mobileNavMenu);
     safeRun(buttonRipple);
     safeRun(navbarShadow);
+    safeRun(setupCategoryFilters);
     safeRun(setupGallery);
     safeRun(setupSlider);
     safeRun(setupFeedbackForm);
