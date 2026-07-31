@@ -600,6 +600,60 @@ a:hover{
     pointer-events:auto;
 }
 
+.filter-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:.6rem;
+}
+
+.filter-btn{
+    padding:.55rem 1.3rem;
+    border-radius:999px;
+    border:1px solid var(--border-strong);
+    background:transparent;
+    color:var(--text-dim);
+    font-family:'Space Mono',monospace;
+    font-size:.75rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    cursor:pointer;
+    transition:transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
+    position:relative;
+    overflow:hidden;
+}
+
+.filter-btn:hover{
+    background:rgba(255,122,41,.1);
+    border-color:var(--orange);
+    color:var(--orange-deep);
+    transform:translateY(-2px);
+}
+
+.filter-btn:active{
+    transform:translateY(0) scale(.96);
+}
+
+.filter-btn.active{
+    background:linear-gradient(135deg,var(--orange),var(--orange-deep));
+    border-color:var(--orange);
+    color:#fff;
+    transform:scale(1.05);
+}
+
+#galleryGrid > .col-sm-6{
+    transition:opacity .35s var(--ease), transform .35s var(--ease);
+}
+
+#galleryGrid > .col-sm-6.filter-hide{
+    opacity:0;
+    transform:scale(.85);
+}
+
+#galleryGrid > .col-sm-6.filter-hidden{
+    display:none;
+}
+
 .photo-grid-title{
     margin-bottom:2rem;
 }
