@@ -373,6 +373,172 @@ a:hover{
     line-height:1.7;
 }
 
+.about-photo{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    aspect-ratio:4/5;
+    max-width:600px;
+    margin:0 auto;
+}
+
+.about-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform 1s var(--ease);
+}
+
+.about-photo:hover img{
+    transform:scale(1.05);
+}
+
+.duo-card{
+    position:absolute;
+    left:1.25rem;
+    right:1.25rem;
+    bottom:1.25rem;
+    display:flex;
+    gap:1.5rem;
+    background:rgba(23,17,11,.65);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:var(--radius);
+    padding:1rem 1.25rem;
+}
+
+.duo-num{
+    font-family:'Anton',sans-serif;
+    font-size:1.6rem;
+    color:var(--orange-light);
+    line-height:1;
+}
+
+.duo-label{
+    font-family:'Space Mono',monospace;
+    font-size:.68rem;
+    color:rgba(255,255,255,.75);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    margin-top:.3rem;
+}
+
+.about-heading{
+    font-size:clamp(1.8rem,3.2vw,2.4rem);
+    margin:0 0 1.1rem;
+    color:var(--text);
+}
+
+#about .text-dim{
+    line-height:1.7;
+    margin-bottom:1rem;
+}
+
+#about .btn-glow{
+    margin-top:.5rem;
+}
+
+.collection-toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:1rem;
+    margin-bottom:2rem;
+}
+
+.collection-heading{
+    margin:0;
+    font-size:clamp(2rem,4vw,2.8rem);
+}
+
+.collection-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-auto-rows:190px;
+    gap:1rem;
+}
+
+.collection-item{
+    position:relative;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--border);
+    cursor:pointer;
+    transition:box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+
+.collection-item:hover{
+    box-shadow:var(--shadow);
+    border-color:var(--border-strong);
+}
+
+.collection-item-tall{
+    grid-row:span 2;
+}
+
+.collection-item-wide{
+    grid-column:span 2;
+}
+
+.collection-item img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .5s var(--ease);
+}
+
+.collection-item:hover img{
+    transform:scale(1.08);
+}
+
+.collection-caption{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:flex-end;
+    padding:1.1rem;
+    background:linear-gradient(to top, rgba(10,7,4,.82), transparent 60%);
+    opacity:0;
+    transition:opacity .3s var(--ease);
+}
+
+.collection-item:hover .collection-caption{
+    opacity:1;
+}
+
+.collection-caption-title{
+    font-family:'Anton',sans-serif;
+    font-size:1rem;
+    text-transform:uppercase;
+    color:#fff;
+}
+
+.collection-caption-sub{
+    font-family:'Space Mono',monospace;
+    font-size:.68rem;
+    color:rgba(255,255,255,.7);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    margin-top:.2rem;
+}
+
+@media (max-width:576px){
+    .collection-grid{
+        grid-template-columns:1fr;
+    }
+
+    .collection-item-wide,
+    .collection-item-tall{
+        grid-column:span 1;
+        grid-row:span 1;
+    }
+}
+
 .slide_box{
     position:relative;
     overflow:hidden;
@@ -1289,6 +1455,48 @@ a:hover{
     .navbar-toggler {
         position:relative;
         z-index:1001;
+    }
+
+    .duo-card{
+        flex-direction:column;
+        gap:.6rem;
+    }
+
+    #about{
+        text-align:center;
+    }
+
+    #about .eyebrow{
+        justify-content:center;
+    }
+
+    #about .about-photo{
+        margin:0 auto 2rem;
+    }
+
+    .collection-toolbar{
+        justify-content:center;
+        text-align:center;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .collection-toolbar .eyebrow{
+        justify-content:center;
+    }
+
+    .collection-grid{
+        grid-template-columns:repeat(2,1fr);
+        grid-auto-rows:160px;
+    }
+
+    .collection-item-wide{
+        grid-column:span 2;
+    }
+
+    .collection-item-tall{
+        grid-column:span 2;
+        grid-row:span 3;
     }
 }
 
