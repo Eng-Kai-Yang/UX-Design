@@ -527,18 +527,6 @@ a:hover{
     margin-top:.2rem;
 }
 
-@media (max-width:576px){
-    .collection-grid{
-        grid-template-columns:1fr;
-    }
-
-    .collection-item-wide,
-    .collection-item-tall{
-        grid-column:span 1;
-        grid-row:span 1;
-    }
-}
-
 .slide_box{
     position:relative;
     overflow:hidden;
@@ -1497,6 +1485,18 @@ a:hover{
     .collection-item-tall{
         grid-column:span 2;
         grid-row:span 3;
+    }
+}
+
+@media (max-width:576px){
+    .collection-grid{
+        grid-template-columns:1fr;
+    }
+
+    .collection-item-wide,
+    .collection-item-tall{
+        grid-column:span 1;
+        grid-row:span 1;
     }
 }
 
