@@ -251,6 +251,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const popupContent = popup.querySelector(".popup-content");
         const url = source.dataset.url || "";
         document.getElementById("popupLocation").textContent = source.dataset.location || "";
+        const mapsLink = document.getElementById("popupMapsLink");
+        if (mapsLink) {
+            const mapsUrl = source.dataset.maps || "";
+            if (mapsUrl) {
+                mapsLink.href = mapsUrl;
+                mapsLink.style.display = "";
+            } else {
+                mapsLink.style.display = "none";
+            }
+        }
         document.getElementById("popupTitle").textContent = source.dataset.title || "";
         document.getElementById("popupDesc").textContent = source.dataset.desc || "";
         document.getElementById("popupBy").textContent = "By " + (source.dataset.photographer || "");

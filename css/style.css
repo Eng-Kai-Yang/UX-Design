@@ -985,6 +985,46 @@ a:hover{
     color:var(--text-faint);
 }
 
+.popup-location-row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:center;
+    gap:.5rem;
+    margin-bottom:.6rem;
+}
+
+.popup-location-row .popup-location{
+    margin-bottom:0;
+    min-width:0;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.popup-maps-link{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+    font-family:'Space Mono',monospace;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--orange-deep);
+    border:1px solid var(--border-strong);
+    border-radius:999px;
+    padding:.3rem .7rem;
+    transition:.25s;
+    flex-shrink:0;
+    white-space:nowrap;
+}
+
+.popup-maps-link:hover{
+    background:rgba(255,122,41,.1);
+    border-color:var(--orange);
+    color:var(--orange);
+}
+
 .modal-backdrop.show{
     opacity:1;
     background:rgba(20,12,6,.78);
