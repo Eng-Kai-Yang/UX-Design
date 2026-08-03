@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
             s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= current);
         });
         const note = row.querySelector(".rating-note");
-        if (note) note.textContent = current ? current + "/5" : "rate this";
+        if (note) note.textContent = current ? `${current}/5` : "rate this";
     }
 
     function openPhotoPopup(source) {
@@ -257,9 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (mapsUrl) {
                 mapsLink.href = mapsUrl;
                 mapsLink.style.display = "";
-            } else {
-                mapsLink.style.display = "none";
-            }
+            } else mapsLink.style.display = "none";
         }
         document.getElementById("popupTitle").textContent = source.dataset.title || "";
         document.getElementById("popupDesc").textContent = source.dataset.desc || "";
@@ -398,7 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const indicator = document.createElement("button");
                 indicator.classList.add("dot_item");
                 if (i === 0) indicator.classList.add("active");
-                indicator.setAttribute("aria-label", "Go to slide " + (i + 1));
+                indicator.setAttribute("aria-label", `Go to slide ${i + 1}`);
                 indicator.addEventListener("click", () => goToSlide(i));
                 indicatorsContainer.appendChild(indicator);
             }
