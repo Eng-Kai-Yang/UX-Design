@@ -220,7 +220,7 @@ a:hover{
 }
 
 .main{
-    padding:7rem 0 5rem;
+    padding:5rem 0 5rem;
 }
 
 .container{
@@ -315,7 +315,7 @@ a:hover{
 }
 
 .section{
-    padding:5rem 0;
+    padding:3rem 0;
 }
 
 .gallery-box{
@@ -1383,7 +1383,7 @@ a:hover{
 
 @media (max-width:992px){
     .main{
-        padding:5rem 0 3rem;
+        padding:5rem 0 5rem;
         text-align:center;
     }
 
