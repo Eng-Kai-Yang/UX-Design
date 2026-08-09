@@ -294,9 +294,21 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(finish, 1500);
     }
 
+    function stripImage(url) {
+        if (!url) return "";
+        const filename = url.split("/").pop() || "";
+        return filename.replace(/\.[a-zA-Z0-9]+$/, "");
+    }
+
     function setupGallery() {
         const grid = document.getElementById("galleryGrid");
         if (!grid) return;
+        document.querySelectorAll(".photo-card").forEach(card => {
+            const id = stripImage(card.dataset.url);
+            card.dataset.id = id;
+            const row = card.querySelector(".star-row");
+            if (row) row.dataset.photoId = id;
+        });
         const ratings = loadRatings();
 
         document.querySelectorAll(".star-row").forEach(row => {
