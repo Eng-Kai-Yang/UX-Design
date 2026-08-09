@@ -483,6 +483,11 @@ a:hover{
     grid-column:span 2;
 }
 
+.collection-item-large{
+    grid-row:span 2;
+    grid-column:span 2;
+}
+
 .collection-item img{
     transition:transform .5s var(--ease);
 }
@@ -1392,7 +1397,7 @@ a:hover{
     }
 
     .main-image img{
-        height:280px;
+        height:480px;
     }
 
     .slide_img{
@@ -1507,6 +1512,12 @@ a:hover{
     .collection-item-wide{
         grid-column:span 2;
     }
+
+    .collection-item-large{
+        grid-row:span 2;
+        grid-column:span 2;
+    }
+
 
     .collection-item-tall{
         grid-column:span 2;

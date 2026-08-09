@@ -130,8 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
             applyFilter(btn.dataset.filter);
         });
         function applyFilter(filter) {
-            const toHide = []
-            const toShow = []
+            const toHide = [];
+            const toShow = [];
             const staying = [];
             items.forEach(item => {
                 const shouldShow = filter === "all" || item.dataset.category === filter;
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 staying.forEach(item => {
                     const first = firstRects.get(item);
                     const last = lastRects.get(item);
-                    const dx = first.left - last.left
+                    const dx = first.left - last.left;
                     const dy = first.top - last.top;
                     if (dx || dy) {
                         item.style.transition = "none";
@@ -294,9 +294,21 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(finish, 1500);
     }
 
+    function stripImage(url) {
+        if (!url) return "";
+        const filename = url.split("/").pop() || "";
+        return filename.replace(/\.[a-zA-Z0-9]+$/, "");
+    }
+
     function setupGallery() {
         const grid = document.getElementById("galleryGrid");
         if (!grid) return;
+        document.querySelectorAll(".photo-card").forEach(card => {
+            const id = stripImage(card.dataset.url);
+            card.dataset.id = id;
+            const row = card.querySelector(".star-row");
+            if (row) row.dataset.photoId = id;
+        });
         const ratings = loadRatings();
 
         document.querySelectorAll(".star-row").forEach(row => {
