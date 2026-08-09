@@ -407,13 +407,21 @@ a:hover{
     border:1px solid rgba(255,255,255,.2);
     border-radius:var(--radius);
     padding:1rem 1.25rem;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.duo-num{
+.duo-num,
+.duo-num-large{
     font-family:'Anton',sans-serif;
     font-size:1.6rem;
     color:var(--orange-light);
     line-height:1;
+}
+
+.duo-num-large{
+    margin-right:3rem;
 }
 
 .duo-label{
@@ -423,6 +431,11 @@ a:hover{
     text-transform:uppercase;
     letter-spacing:.06em;
     margin-top:.3rem;
+    margin-right:2rem;
+}
+
+.duo-card > div:last-child .duo-label{
+    margin-right:0rem;
 }
 
 .about-heading{
@@ -1522,6 +1535,11 @@ a:hover{
     .collection-item-tall{
         grid-column:span 2;
         grid-row:span 2;
+    }
+
+    .duo-num-large,
+    .duo-label{
+        margin-right:0rem;
     }
 }
 
