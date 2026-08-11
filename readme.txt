@@ -2,6 +2,7 @@ Files Directory:
 index.html - Zi Yu
 about.html - Zi Yu
 photography.html - Kai Yang
+learn.html - Kai Yang
 feedback.html - Kai Yang
 feedbackDetails.html - Kai Yang
 404.html - Zi Yu
