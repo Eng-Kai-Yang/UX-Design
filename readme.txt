@@ -1,15 +1,16 @@
-Kai Yang:
-// TODO
+Files Directory:
+index.html - Zi Yu
+about.html - Zi Yu
+photography.html - Kai Yang
+feedback.html - Kai Yang
+feedbackDetails.html - Kai Yang
+404.html - Zi Yu
+style.css - Kai Yang & Zi Yu
+main.js - Kai Yang
 
 
-Zi Yu:
-// TODO
-
-
-Files made together:
-index.html
-about.html
-style.css
+Parts:
+Top Navigation Menu - Kai Yang
 
 
 Sources used:
