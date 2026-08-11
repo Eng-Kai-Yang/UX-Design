@@ -449,6 +449,70 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function setupTipsCarousel() {
+        const track = document.getElementById("tipsTrack");
+        if (!track) return;
+        const prevBtn = document.getElementById("tipsPrev");
+        const nextBtn = document.getElementById("tipsNext");
+        let tips = [];
+        let currentIndex = 0;
+        function visibleCount() {
+            const w = window.innerWidth;
+            if (w >= 992) return 3;
+            if (w >= 576) return 2;
+            return 1;
+        }
+
+        function maxIndex() {
+            return Math.max(0, tips.length - visibleCount());
+        }
+
+        function updateContainer() {
+            currentIndex = Math.min(currentIndex, maxIndex());
+            const cardWidth = track.children.length ? track.children[0].getBoundingClientRect().width : 0;
+            track.style.transform = "translateX(-" + (currentIndex * cardWidth) + "px)";
+            if (prevBtn) prevBtn.style.visibility = currentIndex <= 0 ? "hidden" : "visible";
+            if (nextBtn) nextBtn.style.visibility = currentIndex >= maxIndex() ? "hidden" : "visible";
+        }
+
+        function renderTips() {
+            track.innerHTML = tips.map(tip => `
+                <div class="tip_card">
+                    <div class="tip_card_inner">
+                        <div class="tip_card_icon"><i class="${tip.icon}"></i></div>
+                        <h3 class="tip_card_title">${tip.title}</h3>
+                        <p class="tip_card_text">${tip.text}</p>
+                    </div>
+                </div>
+            `).join("");
+            updateContainer();
+        }
+
+        function nextTip() {
+            currentIndex = Math.min(maxIndex(), currentIndex + 1);
+            updateContainer();
+        }
+
+        function prevTip() {
+            currentIndex = Math.max(0, currentIndex - 1);
+            updateContainer();
+        }
+
+        if (nextBtn) nextBtn.addEventListener("click", nextTip);
+        if (prevBtn) prevBtn.addEventListener("click", prevTip);
+        window.addEventListener("resize", updateContainer);
+        fetch("./data/tips.json")
+            .then(res => res.json())
+            .then(data => {
+                tips = data;
+                renderTips();
+            })
+            .catch(err => {
+                console.error("Could not load tips.json", err);
+                track.innerHTML = '<div class="tip_card"><div class="tip_card_inner"><p class="tip_card_text">Tips could not be loaded.</p></div></div>';
+            });
+    }
+
     function setupFeedbackForm() {
         const feedbackKey = "feedback_details";
         const form = document.getElementById("feedbackForm");
@@ -624,6 +688,7 @@ document.addEventListener("DOMContentLoaded", () => {
     safeRun(setupCategoryFilters);
     safeRun(setupGallery);
     safeRun(setupSlider);
+    safeRun(setupTipsCarousel);
     safeRun(setupFeedbackForm);
     safeRun(setupFeedbackDetails);
 });

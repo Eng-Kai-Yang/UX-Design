@@ -1,0 +1,44 @@
+[
+    {
+        "id": "t1",
+        "icon": "fa-solid fa-sun",
+        "title": "Chase the sun",
+        "text": "Shoot in an hour after sunrise or before sunset. The warm light is softer and adds natural depth that the afternoon sun cannot match."
+    },
+    {
+        "id": "t2",
+        "icon": "fa-solid fa-arrows-left-right",
+        "title": "Use leading lines",
+        "text": "Roads, railings, and rivers can pull the focus straight to your subject. Look for lines before you look for the shot."
+    },
+    {
+        "id": "t3",
+        "icon": "fa-solid fa-person-walking",
+        "title": "Change your perspective",
+        "text": "Crouch down, climb up, or get closer. Shooting from eye-level is the default, so it's rarely the most interesting angle."
+    },
+    {
+        "id": "t4",
+        "icon": "fa-solid fa-layer-group",
+        "title": "Watch your background",
+        "text": "A great subject can be ruined by mess behind it. Scan the whole frame, not just the center, before you take the picture."
+    },
+    {
+        "id": "t5",
+        "icon": "fa-solid fa-square",
+        "title": "Leave some white space",
+        "text": "Empty sky, plain walls, and still water aren't wasted space. They give your subject room to breathe and stand out."
+    },
+    {
+        "id": "t6",
+        "icon": "fa-solid fa-video",
+        "title": "Steady your shot",
+        "text": "Steady your camera, even small movement blurs long exposures."
+    },
+    {
+        "id": "t7",
+        "icon": "fa-solid fa-wand-magic-sparkles",
+        "title": "Know the rules, then break them",
+        "text": "Composition guidelines are a starting point. Some of the best shots come from ignoring them on purpose."
+    }
+]
