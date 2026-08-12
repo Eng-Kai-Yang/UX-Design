@@ -1373,13 +1373,6 @@ a:hover{
     margin:0 auto 2.5rem;
 }
 
-@keyframes ripple-anim{
-    to{
-        transform:scale(3.2);
-        opacity:0;
-    }
-}
-
 .learn-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
@@ -1391,7 +1384,7 @@ a:hover{
     border:1px solid var(--border);
     border-radius:var(--radius);
     padding:1.9rem 1.75rem;
-    transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+    transition:transform .7s var(--ease), box-shadow .7s var(--ease), border-color .7s var(--ease);
 }
 
 .learn-card:hover{
@@ -1685,6 +1678,13 @@ a:hover{
 }
 .tips_carousel .next_btn{
     right:1rem;
+}
+
+@keyframes ripple-anim{
+    to{
+        transform:scale(3.2);
+        opacity:0;
+    }
 }
 
 @media (min-width:576px){

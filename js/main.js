@@ -17,24 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }, {
             threshold: 0.15
         });
-        revealItems.forEach(item => {
-            observer.observe(item);
-        });
+        revealItems.forEach(item => observer.observe(item));
     }
 
     function buttonRipple() {
-        const buttons = document.querySelectorAll(
-            ".btn-glow, .btn-outline-glow"
-        );
+        const buttons = document.querySelectorAll(".btn-glow, .btn-outline-glow");
         buttons.forEach(button => {
             if (button.dataset.rippleAdded) return;
             button.dataset.rippleAdded = "true";
             button.addEventListener("click", function (event) {
                 const circle = document.createElement("span");
-                const size = Math.max(
-                    button.offsetWidth,
-                    button.offsetHeight
-                );
+                const size = Math.max(button.offsetWidth, button.offsetHeight);
                 const rect = button.getBoundingClientRect();
                 circle.className = "ripple";
                 circle.style.width = size + "px";
@@ -74,9 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 navMenu.style.visibility = "visible";
                 navMenu.style.pointerEvents = "auto";
-                requestAnimationFrame(() => {
-                    navMenu.classList.add("open");
-                });
+                requestAnimationFrame(() => navMenu.classList.add("open"));
                 toggler.classList.remove("collapsed");
             }
         });
@@ -237,9 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderStarRow(row) {
         const current = parseInt(row.dataset.current, 10) || 0;
         const stars = row.querySelectorAll("i");
-        stars.forEach(s => {
-            s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= current);
-        });
+        stars.forEach(s => s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= current));
         const note = row.querySelector(".rating-note");
         if (note) note.textContent = current ? `${current}/5` : "rate this";
     }
@@ -373,9 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         setPanelVisible(emptyMsg, false);
         const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-        values.forEach(v => {
-            counts[v] = (counts[v] || 0) + 1;
-        });
+        values.forEach(v => counts[v] = (counts[v] || 0) + 1);
         let maxCount = 1;
         for (const key in counts) if (counts[key] > maxCount) maxCount = counts[key];
         for (let star = 1; star <= 5; star++) {
@@ -394,9 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!slideContainer) return;
         const slides = document.querySelector(".slide_row");
         const slideItems = document.querySelectorAll(".slide_item");
-        slideItems.forEach(item => {
-            item.addEventListener("click", () => openPhotoPopup(item));
-        });
+        slideItems.forEach(item => item.addEventListener("click", () => openPhotoPopup(item)));
         const prevBtn = document.querySelector(".prev_btn");
         const nextBtn = document.querySelector(".next_btn");
         const indicatorsContainer = document.querySelector(".dot_row");
@@ -501,16 +486,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (nextBtn) nextBtn.addEventListener("click", nextTip);
         if (prevBtn) prevBtn.addEventListener("click", prevTip);
         window.addEventListener("resize", updateContainer);
-        fetch("./data/tips.json")
-            .then(res => res.json())
-            .then(data => {
-                tips = data;
-                renderTips();
-            })
-            .catch(err => {
-                console.error("Could not load tips.json", err);
-                track.innerHTML = '<div class="tip_card"><div class="tip_card_inner"><p class="tip_card_text">Tips could not be loaded.</p></div></div>';
-            });
+        fetch("./data/tips.json").then(res => res.json()).then(data => {
+            tips = data;
+            renderTips();
+        })
+        .catch(err => {
+            console.error("Could not load tips.json", err);
+            track.innerHTML = '<div class="tip_card"><div class="tip_card_inner"><p class="tip_card_text">Tips could not be loaded.</p></div></div>';
+        });
     }
 
     function setupFeedbackForm() {
@@ -527,19 +510,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const nameInput = document.getElementById("fbName");
         const nameError = document.getElementById("fbNameError");
-        nameInput.addEventListener("input", () => {
-            setFieldState(nameInput, nameError, nameInput.value.trim().length > 0);
-        });
+        nameInput.addEventListener("input", () => setFieldState(nameInput, nameError, nameInput.value.trim().length > 0));
         const emailInput = document.getElementById("fbEmail");
         const emailError = document.getElementById("fbEmailError");
-        emailInput.addEventListener("input", () => {
-            setFieldState(emailInput, emailError, emailPattern.test(emailInput.value.trim()));
-        });
+        emailInput.addEventListener("input", () => setFieldState(emailInput, emailError, emailPattern.test(emailInput.value.trim())));
         const messageInput = document.getElementById("fbMessage");
         const messageError = document.getElementById("fbMessageError");
-        messageInput.addEventListener("input", () => {
-            setFieldState(messageInput, messageError, messageInput.value.trim().length > 0);
-        });
+        messageInput.addEventListener("input", () => setFieldState(messageInput, messageError, messageInput.value.trim().length > 0));
         const dropdownBox = document.getElementById("fbTopicBox");
         const dropdownBtn = document.getElementById("fbTopicBtn");
         const dropdownLabel = document.getElementById("fbTopicLabel");
@@ -563,9 +540,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const selected = item.dataset.value;
                 dropdownLabel.textContent = selected;
                 dropdownBtn.classList.add("filled");
-                dropdownMenu.querySelectorAll(".dropdown-item").forEach(el => {
-                    el.classList.remove("selected");
-                });
+                dropdownMenu.querySelectorAll(".dropdown-item").forEach(el => el.classList.remove("selected"));
                 item.classList.add("selected");
                 dropdownBox.classList.remove("open");
                 if (selected === "Something else") {
@@ -596,9 +571,7 @@ document.addEventListener("DOMContentLoaded", () => {
             star.addEventListener("click", () => {
                 const value = parseInt(star.dataset.value, 10);
                 ratingHiddenValue.value = value;
-                stars.forEach(s => {
-                    s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= value);
-                });
+                stars.forEach(s => s.classList.toggle("filled", parseInt(s.dataset.value, 10) <= value));
                 ratingHelp.textContent = value + " out of 5";
             });
         });
