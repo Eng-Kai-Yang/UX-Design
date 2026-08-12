@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (link.getAttribute("href") === currentPage) link.classList.add("active");
     });
 
+    const ratingsKey = "photography_ratings";
+    const feedbackKey = "feedback_details";
+
     function showReveal() {
         const revealItems = document.querySelectorAll(".reveal");
         if (!revealItems.length) return;
@@ -189,29 +192,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadRatings() {
         try {
-            const ratingsKey = "photography_ratings";
             return JSON.parse(localStorage.getItem(ratingsKey)) || {};
-        } catch (e) {
+        } catch (error) {
             return {};
         }
     }
 
     function saveRating(photoId, value) {
-        const ratingsKey = "photography_ratings";
         const ratings = loadRatings();
         ratings[photoId] = value;
         localStorage.setItem(ratingsKey, JSON.stringify(ratings));
     }
 
     function deleteRating(photoId) {
-        const ratingsKey = "photography_ratings";
         const ratings = loadRatings();
         delete ratings[photoId];
         localStorage.setItem(ratingsKey, JSON.stringify(ratings));
     }
 
     function clearAllRatings() {
-        localStorage.removeItem("photography_ratings");
+        localStorage.removeItem(ratingsKey);
     }
 
     function setPanelVisible(panel, visible) {
@@ -332,6 +332,19 @@ document.addEventListener("DOMContentLoaded", () => {
         updateRatingsChart();
     }
 
+    function setupClearRatingsButton() {
+        const clearBtn = document.getElementById("clearRatingsBtn");
+        if (!clearBtn) return;
+        clearBtn.addEventListener("click", () => {
+            clearAllRatings();
+            document.querySelectorAll(".star-row").forEach(row => {
+                row.dataset.current = 0;
+                renderStarRow(row);
+            });
+            updateRatingsChart();
+        });
+    }
+
     function updateRatingsChart() {
         const box = document.getElementById("ratingsBox");
         if (!box) return;
@@ -345,16 +358,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const emptyMsg = document.getElementById("ratingsEmpty");
         const clearBtn = document.getElementById("clearRatingsBtn");
         if (clearBtn) clearBtn.classList.toggle("is-visible", total > 0);
-        if (clearBtn) {
-            clearBtn.addEventListener("click", () => {
-                clearAllRatings();
-                document.querySelectorAll(".star-row").forEach(row => {
-                    row.dataset.current = 0;
-                    renderStarRow(row);
-                });
-                updateRatingsChart();
-            });
-        }
         if (total === 0) {
             setPanelVisible(chartWrap, false);
             setPanelVisible(emptyMsg, true);
@@ -425,9 +428,9 @@ document.addEventListener("DOMContentLoaded", () => {
             clearInterval(autoSlideInterval);
         });
         slideContainer.addEventListener("mouseleave", () => {
+            clearInterval(autoSlideInterval);
             autoSlideInterval = setInterval(nextSlide, 5000);
         });
-
         function goToSlide(index) {
             currentIndex = index;
             updateContainer();
@@ -490,14 +493,13 @@ document.addEventListener("DOMContentLoaded", () => {
             tips = data;
             renderTips();
         })
-        .catch(err => {
-            console.error("Could not load tips.json", err);
+        .catch(error => {
+            console.error("Could not load tips.json", error);
             track.innerHTML = '<div class="tip_card"><div class="tip_card_inner"><p class="tip_card_text">Tips could not be loaded.</p></div></div>';
         });
     }
 
     function setupFeedbackForm() {
-        const feedbackKey = "feedback_details";
         const form = document.getElementById("feedbackForm");
         if (!form) return;
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -608,7 +610,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function setupFeedbackDetails() {
         const wrap = document.getElementById("ticketWrap");
         if (!wrap) return;
-        const feedbackKey = "feedback_details";
         const raw = sessionStorage.getItem(feedbackKey);
         if (!raw) {
             window.location.replace("feedback.html");
@@ -617,7 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let data;
         try {
             data = JSON.parse(raw);
-        } catch (e) {
+        } catch (error) {
             window.location.replace("feedback.html");
             return;
         }
@@ -641,16 +642,14 @@ document.addEventListener("DOMContentLoaded", () => {
         } else ratingEl.textContent = "Not rated";
         const anotherBtn = document.getElementById("anotherBtn");
         if (anotherBtn) {
-            anotherBtn.addEventListener("click", () => {
-                sessionStorage.removeItem(feedbackKey);
-            });
+            anotherBtn.addEventListener("click", () => sessionStorage.removeItem(feedbackKey));
         }
     }
     function safeRun(fn) {
         try {
             fn();
-        } catch (err) {
-            console.error(err);
+        } catch (error) {
+            console.error(error);
         }
     }
 
@@ -660,6 +659,7 @@ document.addEventListener("DOMContentLoaded", () => {
     safeRun(navbarShadow);
     safeRun(setupCategoryFilters);
     safeRun(setupGallery);
+    safeRun(setupClearRatingsButton);
     safeRun(setupSlider);
     safeRun(setupTipsCarousel);
     safeRun(setupFeedbackForm);
