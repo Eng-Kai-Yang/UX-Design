@@ -427,14 +427,10 @@ document.addEventListener("DOMContentLoaded", () => {
         slideContainer.addEventListener("mouseenter", () => {
             clearInterval(autoSlideInterval);
         });
-        slideContainer.addEventListener("mouseenter", () => {
-            clearInterval(autoSlideInterval);
-        });
         slideContainer.addEventListener("mouseleave", () => {
             clearInterval(autoSlideInterval);
             autoSlideInterval = setInterval(nextSlide, 5000);
         });
-
         function goToSlide(index) {
             currentIndex = index;
             updateContainer();
@@ -649,16 +645,23 @@ document.addEventListener("DOMContentLoaded", () => {
             anotherBtn.addEventListener("click", () => sessionStorage.removeItem(feedbackKey));
         }
     }
+    function safeRun(fn) {
+        try {
+            fn();
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
-    showReveal();
-    mobileNavMenu();
-    buttonRipple();
-    navbarShadow();
-    setupCategoryFilters();
-    setupGallery();
-    setupClearRatingsButton();
-    setupSlider();
-    setupTipsCarousel();
-    setupFeedbackForm();
-    setupFeedbackDetails();
+    safeRun(showReveal);
+    safeRun(mobileNavMenu);
+    safeRun(buttonRipple);
+    safeRun(navbarShadow);
+    safeRun(setupCategoryFilters);
+    safeRun(setupGallery);
+    safeRun(setupClearRatingsButton);
+    safeRun(setupSlider);
+    safeRun(setupTipsCarousel);
+    safeRun(setupFeedbackForm);
+    safeRun(setupFeedbackDetails);
 });
