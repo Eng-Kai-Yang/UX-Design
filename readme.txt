@@ -40,7 +40,7 @@ Zi Yu:
         style.css
 
 AI Tools:
-    ChatGPT - for implementation of the FLIP (First, Last, Invert, Play) animation
+    ChatGPT
 
 Sources:
     Font Awesome:
