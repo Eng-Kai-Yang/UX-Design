@@ -1,13 +1,17 @@
 Files Directory:
-    index.html
-    about.html
-    photography.html
-    learn.html
-    feedback.html
-    feedbackDetails.html
-    404.html
-    style.css
-    main.js
+    Pages:
+        index.html
+        about.html
+        photography.html
+        learn.html
+        feedback.html
+        feedbackDetails.html
+        404.html
+
+    Files:
+        style.css
+        main.js
+        tips.json
 
 Kai Yang:
     Pages:
@@ -15,8 +19,11 @@ Kai Yang:
         learn.html
         feedback.html
         feedbackDetails.html
+
+    Files:
         style.css
         main.js
+        tips.json
     
     Parts:
         Top Navigation Menu
@@ -24,10 +31,13 @@ Kai Yang:
         Ripple button animation
 
 Zi Yu:
-    index.html
-    about.html
-    404.html
-    style.css
+    Pages:
+        index.html
+        about.html
+        404.html
+
+    Files:
+        style.css
 
 AI Tools:
     ChatGPT - for implementation of the FLIP (First, Last, Invert, Play) animation
