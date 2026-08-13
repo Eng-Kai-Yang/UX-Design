@@ -1,5 +1,11 @@
+Introduction:
+    This website was created as part of a school module project based on a hobby that we enjoy.
+    We chose photography because we both enjoy taking pictures of places, people, and moments that are meaningful to us.
+    The website allows us to share our perspectives on photography, and provide photography tips for others,
+    and showcase the images we've taken together.
+
 Files Directory:
-    Pages:
+    Root:
         index.html
         about.html
         photography.html
@@ -8,39 +14,53 @@ Files Directory:
         feedbackDetails.html
         404.html
 
-    Files:
-        style.css
-        main.js
-        tips.json
+        css/
+            style.css
 
-Kai Yang:
-    Pages:
-        photography.html
-        learn.html
-        feedback.html
-        feedbackDetails.html
+        js/
+            main.js
 
-    Files:
-        style.css
-        main.js
-        tips.json
-    
-    Parts:
-        Top Navigation Menu
-        Reveal animation
-        Ripple button animation
+        data/
+            tips.json
 
-Zi Yu:
-    Pages:
-        index.html
-        about.html
-        404.html
+        images/
+            Nature/
+            People/
+            Urban/
+            icon.png
 
-    Files:
-        style.css
+Individual Contributions:
+    Kai Yang:
+        Pages:
+            photography.html
+            learn.html
+            feedback.html
+            feedbackDetails.html
+
+        Files:
+            style.css (shared contribution)
+            main.js
+            tips.json
+        
+        Universal Components:
+            Top Navigation Menu
+            Mobile Navigation Menu
+            Reveal animation
+            Ripple button animation
+            CTA (Call To Action) button
+
+    Zi Yu:
+        Pages:
+            index.html
+            about.html
+            404.html
+
+        Files:
+            style.css (shared contribution)
 
 AI Tools:
     ChatGPT
+        For finding bugs in our code and code refactoring, any refactored code was still reviewed by us.
 
 Sources:
     Font Awesome:
