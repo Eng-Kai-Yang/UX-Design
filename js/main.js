@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let animating = false;
         const HIDE_STAGGER = 45;
-        const HIDE_DURATION = 320;
+        const HIDE_DURATION = 350;
         const SHOW_STAGGER = 45;
         const SHOW_DURATION = 350;
         const FLIP_DURATION = 500;
