@@ -1,8 +1,8 @@
 Introduction:
-    This website was created as part of a school module project based on a hobby that we enjoy.
-    We chose photography because we both enjoy taking pictures of places, people, and moments that are meaningful to us.
+    This website was created as part of the UX Design in Web Development module project based on a hobby that we enjoy.
+    We chose photography because both of us enjoy taking pictures of places, people, and moments that are meaningful to us.
     The website allows us to share our perspectives on photography, and provide photography tips for others,
-    and showcase the images we've taken together.
+    and showcase the images that we've taken together.
 
 Files Directory:
     Root:
@@ -30,7 +30,7 @@ Files Directory:
             icon.png
 
 Individual Contributions:
-    Kai Yang:
+    Eng Kai Yang:
         Pages:
             photography.html
             learn.html
@@ -49,7 +49,7 @@ Individual Contributions:
             Ripple button animation
             CTA (Call To Action) button
 
-    Zi Yu:
+    Lau Zi Yu:
         Pages:
             index.html
             about.html
