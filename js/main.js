@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }, {
-            threshold: 0.15
+            threshold: 0.15 // trigger reveal animation when 15% of the element is visible
         });
         revealItems.forEach(item => observer.observe(item));
     }
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function buttonRipple() {
         const buttons = document.querySelectorAll(".btn-glow, .btn-outline-glow");
         buttons.forEach(button => {
-            if (button.dataset.rippleAdded) return;
+            if (button.dataset.rippleAdded) return; // prevent the same button from getting ripple listener more than once
             button.dataset.rippleAdded = "true";
             button.addEventListener("click", function (event) {
                 const circle = document.createElement("span");
