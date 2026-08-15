@@ -39,12 +39,12 @@ Individual Contributions:
 
         Files:
             style.css (shared contribution)
-            main.js
+            main.js (shared contribution)
             tips.json
         
         Universal Components:
-            Top Navigation Menu
-            Mobile Navigation Menu
+            Top Navigation Menu (shared contribution)
+            Mobile Navigation Menu (shared contribution)
             Reveal animation
             Ripple button animation
             CTA (Call To Action) button (shared contribution)
@@ -56,9 +56,12 @@ Individual Contributions:
             404.html
 
         Files:
+            main.js(shared contribution)
             style.css (shared contribution)
 
         Universal Components:
+            Top Navigation Menu (shared contribution)
+            Mobile Navigation Menu (shared contribution)
             CTA (Call To Action) button (shared contribution)
 
 AI Tools:
