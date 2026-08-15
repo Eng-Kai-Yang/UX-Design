@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const filterRow = document.getElementById("categoryFilters");
         if (!grid || !filterRow) return;
         const items = Array.from(grid.children);
-        const categories = new Set();
+        const categories = new Set(); // stores unique categories
         items.forEach(item => {
             const card = item.querySelector(".photo-card");
             const url = card ? card.dataset.url || "" : "";
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         Array.from(categories).sort().reverse().forEach(cat => {
-            const btn = document.createElement("button"); // create a filter button for each unique category
+            const btn = document.createElement("button");
             btn.type = "button";
             btn.className = "filter-btn";
             btn.textContent = cat;
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const FLIP_DURATION = 500;
         filterRow.addEventListener("click", event => {
             const btn = event.target.closest(".filter-btn");
-            if (!btn || animating) return; // ignore clicks that are not filter buttons or while a filter animation is running
+            if (!btn || animating) return; // ignore clicks during animation
             filterRow.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             applyFilter(btn.dataset.filter);
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const hideTotalTime = toHide.length ? (toHide.length - 1) * HIDE_STAGGER + HIDE_DURATION : 0;
             setTimeout(() => {
                 const flipItems = staying.concat(toShow);
-                const firstRects = new Map(); // get each item position before grid changes
+                const firstRects = new Map(); // map each element to its position so its old and new positions can be compared 
                 flipItems.forEach(item => firstRects.set(item, item.getBoundingClientRect()));
                 toHide.forEach(item => {
                     item.classList.add("filter-hidden");
@@ -154,9 +154,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     item.classList.add("filter-hide");
                 });
                 void grid.offsetWidth; // force browser to recalculate layout
-                const lastRects = new Map(); // get each item position after hidden items are removed
+                const lastRects = new Map();
                 flipItems.forEach(item => lastRects.set(item, item.getBoundingClientRect()));
-                staying.forEach(item => { // calculate position
+                staying.forEach(item => { // calculate how far each remaining item moved after filtering
                     const first = firstRects.get(item);
                     const last = lastRects.get(item);
                     const dx = first.left - last.left; // invert movement so element starts from old position visually
@@ -164,11 +164,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (dx || dy) {
                         item.style.transition = "none";
                         item.style.transform = `translate(${dx}px, ${dy}px)`;
-                        void item.offsetWidth;
+                        void item.offsetWidth; // force layout so browser registers starting position before animating
                     }
                 });
-                requestAnimationFrame(() => { // wait for browser to commit initial styles before removing hidden states
-                    requestAnimationFrame(() => { // 2 requestAnimationFrame to ensure initial styles transition to final state
+                requestAnimationFrame(() => { // wait 2 animation frames so the browser registers the initial state before starting animation
+                    requestAnimationFrame(() => {
                         staying.forEach(item => {
                             item.style.transition = `transform ${FLIP_DURATION}ms var(--ease)`;
                             item.style.transform = "";
@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             staying.forEach(item => { item.style.transition = ""; item.style.transform = ""; });
                             toShow.forEach(item => { item.style.transitionDelay = ""; });
                             animating = false;
-                        }, Math.max(showTotalTime, FLIP_DURATION) + 50);
+                        }, Math.max(showTotalTime, FLIP_DURATION) + 50); // wait for both reveal and FLIP animation to finish
                     });
                 });
             }, hideTotalTime + 30);
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         popupImg.src = url;
         popupImg.alt = source.dataset.title || "";
         if (popupImg.complete) finish();
-        setTimeout(finish, 1500); // fallback incase image fails to load/errors, prevents popup from staying hidden forever
+        setTimeout(finish, 1500); // fallback in case image fails to load, prevents popup from staying hidden forever
     }
 
     function stripImage(url) {
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const ratings = loadRatings();
 
-        document.querySelectorAll(".star-row").forEach(row => { // get data from local storage if exists
+        document.querySelectorAll(".star-row").forEach(row => { // restore saved ratings after gallery loads
             const photoId = row.dataset.photoId;
             row.dataset.current = ratings[photoId] || 0;
             renderStarRow(row);
@@ -595,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownError.classList.toggle("show", !topicValid);
             if (!nameValid || !emailValid || !messageValid || !topicValid) return;
 
-            sessionStorage.setItem(feedbackKey, JSON.stringify({ // stores submitted data temporarily
+            sessionStorage.setItem(feedbackKey, JSON.stringify({ // stores submitted data temporarily for displaying
                 name: name,
                 email: email,
                 topic: topicValue,
@@ -645,7 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
             anotherBtn.addEventListener("click", () => sessionStorage.removeItem(feedbackKey));
         }
     }
-    function safeRun(fn) { // run each feature independantly so errors doesnt prevent the rest from initializing
+    function safeRun(fn) { // run each feature independently so one error does not stop the rest from initializing
         try {
             fn();
         } catch (error) {
