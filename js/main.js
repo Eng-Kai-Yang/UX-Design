@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add("in");
+                    entry.target.classList.add("in"); // start reveal animation, then stop observing element
                     observer.unobserve(entry.target);
                 }
             });
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 circle.style.left = event.clientX - rect.left - size / 2 + "px";
                 circle.style.top = event.clientY - rect.top - size / 2 + "px";
                 button.appendChild(circle);
-                setTimeout(() => circle.remove(), 600);
+                setTimeout(() => circle.remove(), 600); // remove ripple after 600ms
             });
         });
     }
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".topnav-link").forEach(link => {
             link.addEventListener("click", (e) => {
                 if (navMenu.classList.contains("open")) {
-                    e.preventDefault();
+                    e.preventDefault(); // prevent browser from navigating until animation is complete
                     const destination = link.href;
                     toggler.classList.add("collapsed");
                     navMenu.classList.remove("open");
@@ -96,13 +96,13 @@ document.addEventListener("DOMContentLoaded", () => {
         items.forEach(item => {
             const card = item.querySelector(".photo-card");
             const url = card ? card.dataset.url || "" : "";
-            const match = url.match(/images\/([^/]+)\//i);
+            const match = url.match(/images\/([^/]+)\//i); // derive category from image path
             item.dataset.category = match ? match[1] : "Other";
             categories.add(item.dataset.category);
         });
 
         Array.from(categories).sort().reverse().forEach(cat => {
-            const btn = document.createElement("button");
+            const btn = document.createElement("button"); // create a filter button for each unique category
             btn.type = "button";
             btn.className = "filter-btn";
             btn.textContent = cat;
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const FLIP_DURATION = 500;
         filterRow.addEventListener("click", event => {
             const btn = event.target.closest(".filter-btn");
-            if (!btn || animating) return;
+            if (!btn || animating) return; // ignore clicks that are not filter buttons or while a filter animation is running
             filterRow.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             applyFilter(btn.dataset.filter);
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const hideTotalTime = toHide.length ? (toHide.length - 1) * HIDE_STAGGER + HIDE_DURATION : 0;
             setTimeout(() => {
                 const flipItems = staying.concat(toShow);
-                const firstRects = new Map();
+                const firstRects = new Map(); // get each item position before grid changes
                 flipItems.forEach(item => firstRects.set(item, item.getBoundingClientRect()));
                 toHide.forEach(item => {
                     item.classList.add("filter-hidden");
@@ -153,13 +153,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     item.classList.remove("filter-hidden");
                     item.classList.add("filter-hide");
                 });
-                void grid.offsetWidth;
-                const lastRects = new Map();
+                void grid.offsetWidth; // force browser to recalculate layout
+                const lastRects = new Map(); // get each item position after hidden items are removed
                 flipItems.forEach(item => lastRects.set(item, item.getBoundingClientRect()));
-                staying.forEach(item => {
+                staying.forEach(item => { // calculate position
                     const first = firstRects.get(item);
                     const last = lastRects.get(item);
-                    const dx = first.left - last.left;
+                    const dx = first.left - last.left; // invert movement so element starts from old position visually
                     const dy = first.top - last.top;
                     if (dx || dy) {
                         item.style.transition = "none";
@@ -167,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         void item.offsetWidth;
                     }
                 });
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
+                requestAnimationFrame(() => { // wait for browser to commit initial styles before removing hidden states
+                    requestAnimationFrame(() => { // 2 requestAnimationFrame to ensure initial styles transition to final state
                         staying.forEach(item => {
                             item.style.transition = `transform ${FLIP_DURATION}ms var(--ease)`;
                             item.style.transform = "";
@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const mapsLink = document.getElementById("popupMapsLink");
         if (mapsLink) {
             const mapsUrl = source.dataset.maps || "";
-            if (mapsUrl) {
+            if (mapsUrl) { // only show maps button if a valid link is provided
                 mapsLink.href = mapsUrl;
                 mapsLink.style.display = "";
             } else mapsLink.style.display = "none";
@@ -280,13 +280,13 @@ document.addEventListener("DOMContentLoaded", () => {
         popupImg.src = url;
         popupImg.alt = source.dataset.title || "";
         if (popupImg.complete) finish();
-        setTimeout(finish, 1500);
+        setTimeout(finish, 1500); // fallback incase image fails to load/errors, prevents popup from staying hidden forever
     }
 
     function stripImage(url) {
         if (!url) return "";
         const filename = url.split("/").pop() || "";
-        return filename.replace(/\.[a-zA-Z0-9]+$/, "");
+        return filename.replace(/\.[a-zA-Z0-9]+$/, ""); // derive file name of image for image ID
     }
 
     function setupGallery() {
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const ratings = loadRatings();
 
-        document.querySelectorAll(".star-row").forEach(row => {
+        document.querySelectorAll(".star-row").forEach(row => { // get data from local storage if exists
             const photoId = row.dataset.photoId;
             row.dataset.current = ratings[photoId] || 0;
             renderStarRow(row);
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     event.stopPropagation();
                     const value = parseInt(star.dataset.value, 10);
                     const current = parseInt(row.dataset.current, 10) || 0;
-                    if (value === current) {
+                    if (value === current) { // clicking selected rating again clears it
                         deleteRating(photoId);
                         row.dataset.current = 0;
                     } else {
@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function setupTipsCarousel() {
+    function setupTipsCarousel() { 
         const track = document.getElementById("tipsTrack");
         if (!track) return;
         const prevBtn = document.getElementById("tipsPrev");
@@ -525,15 +525,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const dropdownMenu = document.getElementById("fbTopicMenu");
         const dropdownError = document.getElementById("fbTopicError");
         let topicValue = "";
+        // handle dropdown opening and closing
         dropdownBtn.addEventListener("click", event => {
             event.stopPropagation();
             dropdownBox.classList.toggle("open");
         });
-
         document.addEventListener("click", event => {
             if (!dropdownBox.contains(event.target)) dropdownBox.classList.remove("open");
         });
-
+        // custom topic
         const otherDiv = document.getElementById("fbTopicOthers");
         const otherInput = document.getElementById("fbTopicOther");
         dropdownMenu.querySelectorAll(".dropdown-item").forEach(item => {
@@ -595,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownError.classList.toggle("show", !topicValid);
             if (!nameValid || !emailValid || !messageValid || !topicValid) return;
 
-            sessionStorage.setItem(feedbackKey, JSON.stringify({
+            sessionStorage.setItem(feedbackKey, JSON.stringify({ // stores submitted data temporarily
                 name: name,
                 email: email,
                 topic: topicValue,
@@ -645,7 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
             anotherBtn.addEventListener("click", () => sessionStorage.removeItem(feedbackKey));
         }
     }
-    function safeRun(fn) {
+    function safeRun(fn) { // run each feature independantly so errors doesnt prevent the rest from initializing
         try {
             fn();
         } catch (error) {

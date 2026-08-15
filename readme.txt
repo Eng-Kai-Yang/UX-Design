@@ -47,7 +47,7 @@ Individual Contributions:
             Mobile Navigation Menu
             Reveal animation
             Ripple button animation
-            CTA (Call To Action) button
+            CTA (Call To Action) button (shared contribution)
 
     Lau Zi Yu:
         Pages:
@@ -57,6 +57,9 @@ Individual Contributions:
 
         Files:
             style.css (shared contribution)
+
+        Universal Components:
+            CTA (Call To Action) button (shared contribution)
 
 AI Tools:
     ChatGPT
